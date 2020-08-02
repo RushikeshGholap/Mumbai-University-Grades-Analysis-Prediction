@@ -1,0 +1,191 @@
+ 
+                                        UNIVERSITY OF MUMBAI 
+                                                                                                    Page No.: 1 
+        OFFICE REGISTER FOR THE B.E. (ELECTRONICS AND ELECTRICAL ENGINEERING) (SEM VIII)(CBSGS) EXAMINATION HELD IN MAY 2019 
+               COLLEGE/CENTRE      NAME:995:NEW HORIZO                                              RESULT DATE :- JULY 29, 2019 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ SEAT_NO  NAME 
+    <----- Course-I ----->  <----- Course-II ---->  <---- Course-III ---->  <----- Course-IV ---->  < Course-V >  
+     Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)    Tw(50/20) 
+     In(20/08)   Or(25/10)   In(20/08)   Or(25/10)   In(20/08)   Or(25/10)   In(20/08)   Or(25/10)    Or(50/20)      RESULT  REMARK 
+     Tot         Tot         Tot         Tot         Tot         Tot         Tot         Tot          Tot  
+    C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G   C G GP C*G        äC  äCG  SGPI 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ 1. ELC801     DIGITAL IMAGE PROC.            2. ELC802     INDUSTRIAL AUTOMATION          3. ELC803     HIGH VOLTAGE DC TRANS. 
+ 4. ELECTIVE-II SUBJECT                       5. ELP801     PROJECT-II 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181001 /BHATT EKTA SATYAPRAKASH RAJNI                         (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      70          23          57          22          63          24          63          23           47  
+      20          24          20          23          19          23          19          23           48              P 
+      90          47          77          45          82          47          82          46           95 
+    4 O 10 40   1 O 10 10   4 A  9 36   1 O 10 10   4 O 10 40   1 O 10 10   4 O 10 40   1 O 10 10    6 O 10 60         26  256   9.85 
+ 
+     SGPI: SEM-I: 8.22  ;  SEM-II: 7.85  ;  SEM-III: 9.20  ;  SEM-IV: 9.84  ;  SEM-V: 9.31  ;  SEM-VI: 9.57  ;  SEM-VII: 9.11   ;  CGPI: 9.12 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181002 /CHALGERI NEHA MADAN PRABHA                            (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      66          23          50          21          62          23          59          21           48  
+      20          24          20          23          19          24          19          22           47              P 
+      86          47          70          44          81          47          78          43           95 
+    4 O 10 40   1 O 10 10   4 B  8 32   1 O 10 10   4 O 10 40   1 O 10 10   4 A  9 36   1 O 10 10    6 O 10 60         26  248   9.54 
+ 
+     SGPI: SEM-I: 7.67  ;  SEM-II: 7.22  ;  SEM-III: 9.68  ;  SEM-IV: 9.68  ;  SEM-V: 9.17  ;  SEM-VI: 8.86  ;  SEM-VII: 8.52   ;  CGPI: 8.79 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181003 /CHAVAN RUPALI ARUN USHA                               (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      66          20          50          21          61          22          51          20           43  
+      18          21          20          23          19          23          15          20           44              P 
+      84          41          70          44          80          45          66          40           87 
+    4 O 10 40   1 O 10 10   4 B  8 32   1 O 10 10   4 O 10 40   1 O 10 10   4 C  7 28   1 O 10 10    6 O 10 60         26  240   9.23 
+ 
+          (DIPLOMA STUDENT)           SGPI: SEM-III: 7.36  ;  SEM-IV: 8.16  ;  SEM-V: 7.45  ;  SEM-VI: 6.75  ;  SEM-VII: 8.78   ;  CGPI: 7.96 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181004 /DESAI RIDDHI PRAVIN PRAJAKTA                          (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      57          20          37          21          63          23          45          20           44  
+      17          21          20          23          19          23          14          20           45              P 
+      74          41          57          44          82          46          59          40           89 
+    4 B  8 32   1 O 10 10   4 D  6 24   1 O 10 10   4 O 10 40   1 O 10 10   4 D  6 24   1 O 10 10    6 O 10 60         26  220   8.46 
+ 
+          (DIPLOMA STUDENT)           SGPI: SEM-III: 6.24  ;  SEM-IV: 7.84  ;  SEM-V: 8.04  ;  SEM-VI: 7.04  ;  SEM-VII: 8.22   ;  CGPI: 7.64 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ /- FEMALE, #- 0.229,@- 0.5042,@- 0.5043,* - 0.5045,ADC- ADMISSION CANCELLED, RR- RESERVED, -- FAILS IN THEORY OR PRACTICAL 
+ RLE- RESERVE FOR LOWER EXAMINATION, RPV- PROVISIONAL, RCC- 0.5050, A.ABS- ABSENT, F- FAILS, P- PASSES, NULL- NULL & VOID 
+ G:grade  GP:gradepoints  C:credits  CP:credit points  CGPI:Cumulative Grade Performance Index 
+ äCG:sum of product of credits & grades  äC:sum of credit points   SGPI: äCG/äC 
+ MARKS       : >=80     >=75 and <80     >=70 and <75     >=60 and <70     >=50 and <60     >=45 and <50     >=40 and < 45     <40 
+ GRADE       :   O            A                B                C                D                E                P             F 
+ GRADE POINT :   10           9                8                7                6                5                4             0 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ 
+
+ 
+                                        UNIVERSITY OF MUMBAI 
+                                                                                                    Page No.: 2 
+        OFFICE REGISTER FOR THE B.E. (ELECTRONICS AND ELECTRICAL ENGINEERING) (SEM VIII)(CBSGS) EXAMINATION HELD IN MAY 2019 
+               COLLEGE/CENTRE      NAME:995:NEW HORIZO                                              RESULT DATE :- JULY 29, 2019 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ SEAT_NO  NAME 
+    <----- Course-I ----->  <----- Course-II ---->  <---- Course-III ---->  <----- Course-IV ---->  < Course-V >  
+     Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)    Tw(50/20) 
+     In(20/08)   Or(25/10)   In(20/08)   Or(25/10)   In(20/08)   Or(25/10)   In(20/08)   Or(25/10)    Or(50/20)      RESULT  REMARK 
+     Tot         Tot         Tot         Tot         Tot         Tot         Tot         Tot          Tot  
+    C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G   C G GP C*G        äC  äCG  SGPI 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ 1. ELC801     DIGITAL IMAGE PROC.            2. ELC802     INDUSTRIAL AUTOMATION          3. ELC803     HIGH VOLTAGE DC TRANS. 
+ 4. ELECTIVE-II SUBJECT                       5. ELP801     PROJECT-II 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181005 /NAIR KRISHNAPRIYA KRISHNAKUMAR MINI                   (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      70          23          50          21          63          22          54          22           48  
+      20          23          20          23          19          23          17          22           47              P 
+      90          46          70          44          82          45          71          44           95 
+    4 O 10 40   1 O 10 10   4 B  8 32   1 O 10 10   4 O 10 40   1 O 10 10   4 B  8 32   1 O 10 10    6 O 10 60         26  244   9.38 
+ 
+     SGPI: SEM-I: 6.78  ;  SEM-II: 7.09  ;  SEM-III: 7.88  ;  SEM-IV: 8.12  ;  SEM-V: 8.28  ;  SEM-VI: 8.86  ;  SEM-VII: 9.11   ;  CGPI: 8.19 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181006 /OJHA KAJAL GIRISH MANJU                               (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      56          20          47          22          51          23          42          20           44  
+      18          20          20          23          17          24          11          20           43              P 
+      74          40          67          45          68          47          53          40           87 
+    4 B  8 32   1 O 10 10   4 C  7 28   1 O 10 10   4 C  7 28   1 O 10 10   4 D  6 24   1 O 10 10    6 O 10 60         26  212   8.15 
+ 
+     SGPI: SEM-I: 6.41  ;  SEM-II: 7.50  ;  SEM-III: 8.24  ;  SEM-IV: 7.84  ;  SEM-V: 7.21  ;  SEM-VI: 6.71  ;  SEM-VII: 7.74   ;  CGPI: 7.48 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181007 /PILLAI GOURI PADMANABHA SREELATHA                     (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      57          22          51          21          53          22          47          20           45  
+      19          22          20          23          18          23          17          20           45              P 
+      76          44          71          44          71          45          64          40           90 
+    4 A  9 36   1 O 10 10   4 B  8 32   1 O 10 10   4 B  8 32   1 O 10 10   4 C  7 28   1 O 10 10    6 O 10 60         26  228   8.77 
+ 
+     SGPI: SEM-I: 6.69  ;  SEM-II: 6.50  ;  SEM-III: 7.44  ;  SEM-IV: 7.28  ;  SEM-V: 7.07  ;  SEM-VI: 6.64  ;  SEM-VII: 8.19   ;  CGPI: 7.32 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181008 /PILLAI PARVATHI PADMANABHA SREELATHA                  (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      63          22          41          21          50          22          40          20           45  
+      18          22          20          23          18          23          16          20           45              P 
+      81          44          61          44          68          45          56          40           90 
+    4 O 10 40   1 O 10 10   4 C  7 28   1 O 10 10   4 C  7 28   1 O 10 10   4 D  6 24   1 O 10 10    6 O 10 60         26  220   8.46 
+ 
+     SGPI: SEM-I: 6.63  ;  SEM-II: 5.96  ;  SEM-III: 6.56  ;  SEM-IV: 6.28  ;  SEM-V: 5.97  ;  SEM-VI: 6.21  ;  SEM-VII: 8.63   ;  CGPI: 6.84 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ /- FEMALE, #- 0.229,@- 0.5042,@- 0.5043,* - 0.5045,ADC- ADMISSION CANCELLED, RR- RESERVED, -- FAILS IN THEORY OR PRACTICAL 
+ RLE- RESERVE FOR LOWER EXAMINATION, RPV- PROVISIONAL, RCC- 0.5050, A.ABS- ABSENT, F- FAILS, P- PASSES, NULL- NULL & VOID 
+ G:grade  GP:gradepoints  C:credits  CP:credit points  CGPI:Cumulative Grade Performance Index 
+ äCG:sum of product of credits & grades  äC:sum of credit points   SGPI: äCG/äC 
+ MARKS       : >=80     >=75 and <80     >=70 and <75     >=60 and <70     >=50 and <60     >=45 and <50     >=40 and < 45     <40 
+ GRADE       :   O            A                B                C                D                E                P             F 
+ GRADE POINT :   10           9                8                7                6                5                4             0 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+ 
+
+ 
+                                        UNIVERSITY OF MUMBAI 
+                                                                                                    Page No.: 3 
+        OFFICE REGISTER FOR THE B.E. (ELECTRONICS AND ELECTRICAL ENGINEERING) (SEM VIII)(CBSGS) EXAMINATION HELD IN MAY 2019 
+               COLLEGE/CENTRE      NAME:995:NEW HORIZO                                              RESULT DATE :- JULY 29, 2019 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ SEAT_NO  NAME 
+    <----- Course-I ----->  <----- Course-II ---->  <---- Course-III ---->  <----- Course-IV ---->  < Course-V >  
+     Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)   Th(80/32)   Tw(25/10)    Tw(50/20) 
+     In(20/08)   Or(25/10)   In(20/08)   Or(25/10)   In(20/08)   Or(25/10)   In(20/08)   Or(25/10)    Or(50/20)      RESULT  REMARK 
+     Tot         Tot         Tot         Tot         Tot         Tot         Tot         Tot          Tot  
+    C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G  C G GP C*G   C G GP C*G        äC  äCG  SGPI 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ 1. ELC801     DIGITAL IMAGE PROC.            2. ELC802     INDUSTRIAL AUTOMATION          3. ELC803     HIGH VOLTAGE DC TRANS. 
+ 4. ELECTIVE-II SUBJECT                       5. ELP801     PROJECT-II 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181009 /SAWANT  SAYALI KRUSHNA KARISHMA                       (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      42          20          50          21          57          22          45          20           41  
+      18          21          20          22          17          23          15          20           42              P 
+      60          41          70          43          74          45          60          40           83 
+    4 C  7 28   1 O 10 10   4 B  8 32   1 O 10 10   4 B  8 32   1 O 10 10   4 C  7 28   1 O 10 10    6 O 10 60         26  220   8.46 
+ 
+          (DIPLOMA STUDENT)           SGPI: SEM-III: 6.36  ;  SEM-IV: 6.80  ;  SEM-V: 6.62  ;  SEM-VI: 6.50  ;  SEM-VII: 8.19   ;  CGPI: 7.16 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181010 /SWAMINATHAN LAVANYA ASHOK UMA MAHESWARI               (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      67          23          56          23          60          24          50          23           46  
+      20          23          20          24          20          24          18          22           46              P 
+      87          46          76          47          80          48          68          45           92 
+    4 O 10 40   1 O 10 10   4 A  9 36   1 O 10 10   4 O 10 40   1 O 10 10   4 C  7 28   1 O 10 10    6 O 10 60         26  244   9.38 
+ 
+     SGPI: SEM-I: 6.63  ;  SEM-II: 8.04  ;  SEM-III: 8.56  ;  SEM-IV: 9.36  ;  SEM-V: 9.03  ;  SEM-VI: 8.50  ;  SEM-VII: 9.26   ;  CGPI: 8.60 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181011 /TALOLE SAMIDHA SANJAY SAYALI                          (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      72          22          48          21          62          23          59          20           44  
+      20          22          18          23          19          23          18          20           44              P 
+      92          44          66          44          81          46          77          40           88 
+    4 O 10 40   1 O 10 10   4 C  7 28   1 O 10 10   4 O 10 40   1 O 10 10   4 A  9 36   1 O 10 10    6 O 10 60         26  244   9.38 
+ 
+     SGPI: SEM-I: 6.67  ;  SEM-II: 6.76  ;  SEM-III: 7.60  ;  SEM-IV: 8.08  ;  SEM-V: 7.62  ;  SEM-VI: 7.86  ;  SEM-VII: 8.78   ;  CGPI: 7.84 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+  9181012 /YADAV AARTI YADAVENDRA SUSHEELA                       (ELECTIVE: ELE802:POWER QUALITY) 
+ 
+      63          21          46          22          63          23          60          22           44  
+      19          21          20          23          19          24          16          21           43              P 
+      82          42          66          45          82          47          76          43           87 
+    4 O 10 40   1 O 10 10   4 C  7 28   1 O 10 10   4 O 10 40   1 O 10 10   4 A  9 36   1 O 10 10    6 O 10 60         26  244   9.38 
+ 
+     SGPI: SEM-I: 7.15  ;  SEM-II: 7.63  ;  SEM-III: 9.68  ;  SEM-IV: 9.04  ;  SEM-V: 8.62  ;  SEM-VI: 7.96  ;  SEM-VII: 8.96   ;  CGPI: 8.55 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+ /- FEMALE, #- 0.229,@- 0.5042,@- 0.5043,* - 0.5045,ADC- ADMISSION CANCELLED, RR- RESERVED, -- FAILS IN THEORY OR PRACTICAL 
+ RLE- RESERVE FOR LOWER EXAMINATION, RPV- PROVISIONAL, RCC- 0.5050, A.ABS- ABSENT, F- FAILS, P- PASSES, NULL- NULL & VOID 
+ G:grade  GP:gradepoints  C:credits  CP:credit points  CGPI:Cumulative Grade Performance Index 
+ äCG:sum of product of credits & grades  äC:sum of credit points   SGPI: äCG/äC 
+ MARKS       : >=80     >=75 and <80     >=70 and <75     >=60 and <70     >=50 and <60     >=45 and <50     >=40 and < 45     <40 
+ GRADE       :   O            A                B                C                D                E                P             F 
+ GRADE POINT :   10           9                8                7                6                5                4             0 
+ ------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+
