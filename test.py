@@ -1,6 +1,4 @@
-
 import streamlit as st
-
 
 st.title('Mumbai University Engineering Project')
 
