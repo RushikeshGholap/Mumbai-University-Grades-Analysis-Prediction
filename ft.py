@@ -20,13 +20,7 @@ def intro():
 
     st.sidebar.success("Select menu from above ")
 
-    st.markdown(
-        """
-        This is introduction
-        
-        """
-    )
-
+   
 
 # Turn off black formatting for this function to present the user with more
 # compact code.
@@ -180,9 +174,10 @@ def suggestion():
         """
     )
 def working():
+    import streamlit as st
     st.markdown(
         """
         This is how it works    
         """
     )
-    print('done')
+    st.write('done')

@@ -18,7 +18,7 @@ LOGGER = get_logger(__name__)
 # demo_name -> (demo_ft, demo_description)  
 ft = OrderedDict(
     [
-        ("Intro ", (ft.intro())),
+        ("Intro ", (ft.intro,None)),
         (
             "Prediction",
             (
@@ -82,20 +82,6 @@ This demo shows how to use `st.write` to visualize Pandas DataFrames.
 def run():
     demo_name = st.sidebar.selectbox("Choose from ft", list(ft.keys()), 0)
     demo = ft[demo_name][0]
-
-    if demo_name == "intro":
-        
-        st.write("# Welcome to Streamlit! 👋")
-    else:
-        
-        st.markdown("# %s" % demo_name)
-        description = ft[demo_name][1]
-        if description:
-            st.write(description)
-        # Clear everything from the intro page.
-        # We only have 4 elements in the page so this is intentional overkill.
-        for i in range(10):
-            st.empty()
 
     demo()
 
