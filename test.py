@@ -16,7 +16,7 @@ LOGGER = get_logger(__name__)
 # demo_name -> (demo_ft, demo_description)  
 ft = OrderedDict(
     [
-        ("Intro ", (ft.intro,None)),
+        ("-", (ft.about,None)),
         (
             "Prediction",
             (
@@ -78,13 +78,13 @@ This demo shows how to use `st.write` to visualize Pandas DataFrames.
 
 
 def run():
-    demo_name = st.sidebar.selectbox("Choose from ft", list(ft.keys()), 0)
+    demo_name = st.sidebar.selectbox("Choose from Menu 👇 ", list(ft.keys()), 0)
     demo = ft[demo_name][0]
 
     demo()
 
    
-    st.write("#### -Rushikesh Gholap")
+    st.write("##### -Rushikesh Gholap")
 
 
 if __name__ == "__main__":
