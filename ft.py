@@ -39,7 +39,9 @@ def prediction():
     st.sidebar.success("Enter the semwise Pointers  👇 ")
     
     if diploma:
-        mean_df = pd.read_csv('')
+        mean_df = pd.read_csv('./mean_df_dip.csv')
+        max_df = pd.read_csv('./max_df_dip.csv')
+        min_df = pd.read_csv('./min_df_dip.csv')
 
         dip_template = pd.read_csv('./Diploma_template.csv')
         
@@ -54,21 +56,20 @@ def prediction():
         sub_dep = st.sidebar.selectbox(
             "Choose Department", list(dep_list))
 
-        
         diff = 0 
         sem_1 = None
         sem_2 = None
-        sem_3 = st.sidebar.number_input("Sem 3",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']+diff).round(2)),min_value=float(0),max_value=float(10))   
+        sem_3 = st.sidebar.number_input("Sem 3",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']+diff).round(2)))),min_value=float(0),max_value=float(10))   
         diff = sem_3-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']).round(2))
-        sem_4 = st.sidebar.number_input("Sem 4",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_4']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_4 = st.sidebar.number_input("Sem 4",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_4']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_4-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_4']).round(2))
-        sem_5 = st.sidebar.number_input("Sem 5",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_5']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_5 = st.sidebar.number_input("Sem 5",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_5']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_5-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_5']).round(2))
-        sem_6 = st.sidebar.number_input("Sem 6",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_6']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_6 = st.sidebar.number_input("Sem 6",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_6']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_6-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_6']).round(2))
-        sem_7 = st.sidebar.number_input("Sem 7",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_7']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_7 = st.sidebar.number_input("Sem 7",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_7']+diff).round(2)))),min_value=float(0),max_value=float(10))
         
-        
+              
         college_code = 'college_code_'+str(sub_college)
         dep = 'department_'+str(sub_dep)
         df_1 = { college_code:1 ,    dep:1 , 
@@ -79,16 +80,27 @@ def prediction():
         
         pred = dip_template.append(df_1,ignore_index=True)
         pred.fillna(0,inplace= True )
+        
         sem_8 = float(regression_model_diploma.predict(pred[-1:]))
         cgpi = statistics.mean([sem_8,sem_3,sem_4,sem_5,sem_6,sem_7])
-        
+        mean_college = [sem_1,sem_2]
+        max_college = [sem_1,sem_2]
+        min_college = [sem_1,sem_2]
+        for x in ['sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']:
 
+            mean_college.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))
+            max_college.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
+            min_college.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
+            
+        
         st.write("The predicted pointers for SEM VIII :",round(sem_8,2))
         st.write("The predicted CGPI :",round(cgpi,2))
- 
+
 
     else:
         mean_df = pd.read_csv('./mean_df.csv')
+        max_df = pd.read_csv('./max_df.csv')
+        min_df = pd.read_csv('./min_df.csv')
         template = pd.read_csv('./template.csv')
         college_code_list = mean_df['college_code'].unique()
         sub_college = st.sidebar.selectbox(
@@ -103,25 +115,28 @@ def prediction():
         infile.close()
                 
         diff = 0 
-        sem_1 = st.sidebar.number_input("Sem 1",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_1']+diff).round(2)),min_value=float(0),max_value=float(10))
+        diff = 0 
+        sem_1 = st.sidebar.number_input("Sem 1",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_1']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_1-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_1']).round(2))
-        sem_2 = st.sidebar.number_input("Sem 2",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_2']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_2 = st.sidebar.number_input("Sem 2",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_2']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_2-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_2']).round(2))
-        sem_3 = st.sidebar.number_input("Sem 3",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']+diff).round(2)),min_value=float(0),max_value=float(10))   
+        sem_3 = st.sidebar.number_input("Sem 3",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']+diff).round(2)))),min_value=float(0),max_value=float(10))   
         diff = sem_3-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']).round(2))
-        sem_4 = st.sidebar.number_input("Sem 4",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_4']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_4 = st.sidebar.number_input("Sem 4",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_4']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_4-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_4']).round(2))
-        sem_5 = st.sidebar.number_input("Sem 5",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_5']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_5 = st.sidebar.number_input("Sem 5",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_5']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_5-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_5']).round(2))
-        sem_6 = st.sidebar.number_input("Sem 6",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_6']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_6 = st.sidebar.number_input("Sem 6",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_6']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_6-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_6']).round(2))
-        sem_7 = st.sidebar.number_input("Sem 7",value =  float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_7']+diff).round(2)),min_value=float(0),max_value=float(10))
+        sem_7 = st.sidebar.number_input("Sem 7",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_7']+diff).round(2)))),min_value=float(0),max_value=float(10))
         mean_college = []
         max_college = []
         min_college = []
         for x in ['sem_1','sem_2','sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']:
             
             mean_college.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))
+            max_college.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
+            min_college.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
 
 
     
