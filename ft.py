@@ -3,6 +3,20 @@ import urllib.error
 
 def about():
     import streamlit as st
+    
+    
+    
+    st.markdown(
+        """ <p style="color:red">
+         <b>Note</b> - Change the parameters on left menu and if its not present hit on arrow at top left , you will get a menubar.
+        If your using mobile device then you might require to hit arrow frequently as it gets hidden due to  diplay size is small.
+        For best experience use Desktop 
+        </p>
+
+
+        """,unsafe_allow_html=True
+
+    )
 
     st.sidebar.success("Select from Menu 👆 ")
 
@@ -19,6 +33,8 @@ def prediction():
     from sklearn.linear_model import LinearRegression
     import plotly.graph_objects as go
     import statistics 
+    import plotly.express as px 
+
 
 
 
@@ -31,14 +47,20 @@ def prediction():
     
     
     st.markdown(
-        """ 
-        Change the parameters on left menu and if its not present hit on arrow at top left you will get menubar
-        """
+        """ <p style="color:red">
+         <b>Note</b> - Change the parameters on left menu and if its not present hit on arrow at top left , you will get a menubar.
+        If your using mobile device then you might require to hit arrow frequently as it gets hidden due to  diplay size is small.
+        For best experience use Desktop 
+        </p>
+
+
+        """,unsafe_allow_html=True
 
     )
     st.sidebar.success("Enter the semwise Pointers  👇 ")
     
     if diploma:
+        counter = pd.read_csv("./counter.csv")
         mean_df = pd.read_csv('./mean_df_dip.csv')
         max_df = pd.read_csv('./max_df_dip.csv')
         min_df = pd.read_csv('./min_df_dip.csv')
@@ -59,6 +81,8 @@ def prediction():
         diff = 0 
         sem_1 = None
         sem_2 = None
+        sem_8 = None
+        cgpi = None
         sem_3 = st.sidebar.number_input("Sem 3",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']+diff).round(2)))),min_value=float(0),max_value=float(10))   
         diff = sem_3-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_3']).round(2))
         sem_4 = st.sidebar.number_input("Sem 4",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_4']+diff).round(2)))),min_value=float(0),max_value=float(10))
@@ -81,8 +105,7 @@ def prediction():
         pred = dip_template.append(df_1,ignore_index=True)
         pred.fillna(0,inplace= True )
         
-        sem_8 = float(regression_model_diploma.predict(pred[-1:]))
-        cgpi = statistics.mean([sem_8,sem_3,sem_4,sem_5,sem_6,sem_7])
+        
         mean_college = [sem_1,sem_2]
         max_college = [sem_1,sem_2]
         min_college = [sem_1,sem_2]
@@ -92,16 +115,30 @@ def prediction():
             max_college.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
             min_college.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
             
+        st.write("<b> College selected : <i  style ='color:#3366ff'>%s</i> </b> " % sub_college, unsafe_allow_html=True)
+        st.write(" <b> Deparment selected : <i style ='color:#3366ff'>%s</i> </b>"%sub_dep, unsafe_allow_html=True)
+        st.write("<b><i>Entered Pointers 👇</i></b>",unsafe_allow_html = True)
+        st.write("<b>SEM III : <i style='color:#3366ff'>%4.2f</i> | SEM IV : <i style='color:#3366ff'>%4.2f</i> | SEM V : <i style='color:#3366ff'>%4.2f</i> | SEM VI : <i style='color:#3366ff'>%4.2f</i> | SEM VII : <i style='color:#3366ff'>%4.2f</i> </b>"%(sem_3,sem_4,sem_5,sem_6,sem_7),unsafe_allow_html=True)
+        if st.button('Predict'):
+            sem_8 = float(regression_model_diploma.predict(pred[-1:]))
+            cgpi = statistics.mean([sem_8,sem_3,sem_4,sem_5,sem_6,sem_7])
+            st.write(" <b > The predicted pointers for SEM VIII : <i style ='color:#0047b3' >%4.2f</i></b> "%sem_8, unsafe_allow_html=True)
+            st.write(" <b >The predicted CGPI : <i style ='color:#0047b3'>%4.2f</i> </b>"%cgpi, unsafe_allow_html=True)
+            row = { 'college_code':sub_college ,    'dep':sub_dep , 
+                                'sem_1':sem_1 ,        'sem_2': sem_2,
+                                'sem_3': sem_3,            'sem_4': sem_4,        'sem_5':sem_5 ,
+                                'sem_6': sem_6,            'sem_7': sem_7 , 'sem_8':sem_8, 'cgpi':cgpi , 'type':'Diploma'}
+            counter = counter.append(row,ignore_index =True)
+            counter.to_csv('counter.csv',index=False)
         
-        st.write("The predicted pointers for SEM VIII :",round(sem_8,2))
-        st.write("The predicted CGPI :",round(cgpi,2))
-
-
     else:
+        counter = pd.read_csv("./counter.csv")
         mean_df = pd.read_csv('./mean_df.csv')
         max_df = pd.read_csv('./max_df.csv')
         min_df = pd.read_csv('./min_df.csv')
         template = pd.read_csv('./template.csv')
+
+
         college_code_list = mean_df['college_code'].unique()
         sub_college = st.sidebar.selectbox(
             "Choose College Code ", list(college_code_list))
@@ -113,8 +150,9 @@ def prediction():
         infile = open('regression_model_regular','rb')
         regression_model_regular = pickle.load(infile)
         infile.close()
-                
-        diff = 0 
+              
+        sem_8 = None
+        cgpi = None
         diff = 0 
         sem_1 = st.sidebar.number_input("Sem 1",value =  float(min(10,float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_1']+diff).round(2)))),min_value=float(0),max_value=float(10))
         diff = sem_1-float((mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)]['sem_1']).round(2))
@@ -151,98 +189,64 @@ def prediction():
         
         pred = template.append(df_1,ignore_index=True)
         pred.fillna(0,inplace= True )
-        sem_8 = float(regression_model_regular.predict(pred[-1:]))
-        cgpi = statistics.mean([sem_8,sem_1,sem_2,sem_3,sem_4,sem_5,sem_6,sem_7])
-        st.write("The predicted pointers for SEM VIII :",round(sem_8,2))
-        st.write("The predicted CGPI :",round(cgpi,2))
+        
+        st.write("<b> College selected : <i  style ='color:#3366ff'>%s</i> </b> " % sub_college, unsafe_allow_html=True)
+        st.write(" <b> Deparment selected : <i style ='color:#3366ff'>%s</i> </b>"%sub_dep, unsafe_allow_html=True)
+        st.write("<b><i>Entered Pointers 👇</i></b>",unsafe_allow_html = True)
+        st.write("<b>SEM I : <i style='color:#3366ff'>%4.2f</i> | SEM II : <i style='color:#3366ff'>%4.2f</i> | SEM III : <i style='color:#3366ff'>%4.2f</i> | SEM IV : <i style='color:#3366ff'>%4.2f</i> | SEM V : <i style='color:#3366ff'>%4.2f</i> | SEM VI : <i style='color:#3366ff'>%4.2f</i> | SEM VII : <i style='color:#3366ff'>%4.2f</i> </b>"%(sem_1,sem_2,sem_3,sem_4,sem_5,sem_6,sem_7),unsafe_allow_html=True)
+        
+        if st.button('Predict'):
+            sem_8 = float(regression_model_regular.predict(pred[-1:]))
+            cgpi = statistics.mean([sem_8,sem_1,sem_2,sem_3,sem_4,sem_5,sem_6,sem_7])
+            st.write(" <b > The predicted pointers for SEM VIII : <i style ='color:#0047b3' >%4.2f</i></b> "%sem_8, unsafe_allow_html=True)
+            st.write(" <b >The predicted CGPI : <i style ='color:#0047b3'>%4.2f</i> </b>"%cgpi, unsafe_allow_html=True)
+            row = { 'college_code':sub_college ,    'dep':sub_dep , 
+                                'sem_1':sem_1 ,        'sem_2': sem_2,
+                                'sem_3': sem_3,            'sem_4': sem_4,        'sem_5':sem_5 ,
+                                'sem_6': sem_6,            'sem_7': sem_7 , 'sem_8':sem_8, 'cgpi':cgpi , 'type':'Regular'}
+            counter = counter.append(row,ignore_index =True)
+            counter.to_csv('counter.csv',index=False)
+            
+    
+            
+
     # Add data
     sem = ["SEM I","SEM II","SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]            
     predicted = [sem_1,sem_2,sem_3,sem_4,sem_5,sem_6,sem_7,sem_8,cgpi]
+   
     fig = go.Figure()
     # Create and style traces
     fig.add_trace(go.Scatter(x=sem, y=max_college, name='Max of College',
                             line=dict(color='firebrick', width=4)))
-    fig.add_trace(go.Scatter(x=sem, y=mean_college, name='Mean of College',
+    fig.add_trace(go.Scatter(x=sem, y=mean_college, name='Average of College',
                             line=dict(color='royalblue', width=4)))
     fig.add_trace(go.Scatter(x=sem, y=min_college, name = 'Min of College',
                             line=dict(color='red', width=4)))
-    fig.add_trace(go.Scatter(x=sem, y=predicted, name='Predicted',
+    fig.add_trace(go.Scatter(x=sem, y=predicted, name='Current/Predicted',
                             line=dict(color='green', width=4,
                                 dash='dash'),connectgaps=False ))
 
     # Edit the layout
     fig.update_layout(title='Performance per Semisters ',
-                    xaxis_title='Semisters ',
-                    yaxis_title='Pointers')
+                        xaxis_title='Semisters ',
+                    yaxis_title='Pointers',height=550)
     fig.update_yaxes(tickvals=[0,1,2,3,4,5,6,7,8,9,10])
     st.plotly_chart(fig)
+
+   
+    st.write(" <b >Predictions performed Counter: <i style ='color:red'>%.0f</i> </b>"%counter.shape[0], unsafe_allow_html=True)
+    df = counter['type'].value_counts().rename_axis('Type').reset_index(name='Counts')
+
+
+    fig_1 = px.bar(df,x='Counts',y ='Type',barmode='stack',orientation='h',height=250,text='Counts',color="Type",title='Category wise predicted counts')
+    fig_1.update_traces(texttemplate='%{text}',textposition='outside')
+    st.plotly_chart(fig_1)
 
 
 
 def analysis():
     import streamlit as st
-    import numpy as np
-
-    st.markdown(
-        """
-        This is analysis 
-        """
-    )
-
-      
-    # Interactive Streamlit elements, like these sliders, return their value.
-    # This gives you an extremely simple interaction model.
-    iterations = st.sidebar.slider("Level of detail", 2, 20, 10, 1)
-    separation = st.sidebar.slider("Separation", 0.7, 2.0, 0.7885)
-
-    # Non-interactive elements return a placeholder to their location
-    # in the app. Here we're storing progress_bar to update it later.
-    progress_bar = st.sidebar.progress(0)
-
-    # These two elements will be filled in later, so we create a placeholder
-    # for them using st.empty()
-    frame_text = st.sidebar.empty()
-    image = st.empty()
-
-    m, n, s = 960, 640, 400
-    x = np.linspace(-m / s, m / s, num=m).reshape((1, m))
-    y = np.linspace(-n / s, n / s, num=n).reshape((n, 1))
-
-    for frame_num, a in enumerate(np.linspace(0.0, 4 * np.pi, 100)):
-        # Here were setting value for these two elements.
-        progress_bar.progress(frame_num)
-        frame_text.text("Frame %i/100" % (frame_num + 1))
-
-        # Performing some fractal wizardry.
-        c = separation * np.exp(1j * a)
-        Z = np.tile(x, (n, 1)) + 1j * np.tile(y, (1, m))
-        C = np.full((n, m), c)
-        M = np.full((n, m), True, dtype=bool)
-        N = np.zeros((n, m))
-
-        for i in range(iterations):
-            Z[M] = Z[M] * Z[M] + C[M]
-            M[np.abs(Z) > 2] = False
-            N[M] = i
-
-        # Update the image placeholder by calling the image() function on it.
-        image.image(1.0 - (N / N.max()), use_column_width=True)
-
-    # We clear elements by calling empty on them.
-    progress_bar.empty()
-    frame_text.empty()
-
-    # Streamlit widgets automatically run the script from top to bottom. Since
-    # this button is not connected to any other logic, it just causes a plain
-    # rerun.
-    st.button("Re-run")
-
-
-# fmt: on
-
-# Turn off black formatting for this function to present the user with more
-# compact code.
-# fmt: off
+    st.write('Game')
 def compare():
     import streamlit as st
     import time

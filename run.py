@@ -140,10 +140,28 @@ pickle.dump(regressor,outfile)
 outfile.close()
 plt.show()
 
+
+mean_df = regular.groupby(['college_code','department']).mean()
+mean_df.reset_index(inplace=True)
+mean_df.to_csv('mean_df.csv',index =False)
+
+max_df = regular.groupby(['college_code','department']).max()
+max_df.reset_index(inplace=True)
+max_df.to_csv('max_df.csv',index =False)
+
+
+min_df = regular.groupby(['college_code','department']).min()
+min_df.reset_index(inplace=True)
+min_df.to_csv('min_df.csv',index =False)
+
+
+
+
+
 data =  diploma.filter(['department', 'college_code',
                         'sem_3', 'sem_4', 'sem_5', 
                         'sem_6', 'sem_7', 'sem_8'], axis=1)
-final = pd.get_dummies(data,columns=['department', 'college_code'],drop_first=True)
+final = pd.get_dummies(data,columns=['department', 'college_code'],drop_first=False)
 X = final.drop('sem_8',1)
 y = final['sem_8']
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.33,random_state=13)
@@ -166,6 +184,17 @@ pickle.dump(regressor,outfile)
 outfile.close()
 plt.show()
 
+min_df_dip = diploma.groupby(['college_code','department']).min()
+min_df_dip.reset_index(inplace=True)
+min_df_dip.to_csv('min_df_dip.csv',index =False)
+
+mean_df_dip = diploma.groupby(['college_code','department']).mean()
+mean_df_dip.reset_index(inplace=True)
+mean_df_dip.to_csv('mean_df_dip.csv',index =False)
+
+max_df_dip = diploma.groupby(['college_code','department']).max()
+max_df_dip.reset_index(inplace=True)
+max_df_dip.to_csv('max_df_dip.csv',index =False)
 
 
 
