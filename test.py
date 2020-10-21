@@ -29,7 +29,7 @@ to tune different parameters.
             ),
         ),
         (
-            "Analyse",
+            "Analyse/Compare/Insights",
             (
                 ft.analysis,
                 """
@@ -39,17 +39,7 @@ Streamlit. We're generating a bunch of random numbers in a loop for around
 """,
             ),
         ),
-        (
-            "Compare",
-            (
-                ft.compare,
-                """
-This demo shows how to use
-[`st.deck_gl_chart`](https://docs.streamlit.io/en/latest/api.html#streamlit.deck_gl_chart)
-to display geospatial data.
-""",
-            ),
-        ),
+       
         (
             "Contribute",
             (

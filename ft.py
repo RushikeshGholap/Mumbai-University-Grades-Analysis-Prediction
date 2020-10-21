@@ -60,12 +60,12 @@ def prediction():
     st.sidebar.success("Enter the semwise Pointers  👇 ")
     
     if diploma:
-        counter = pd.read_csv("./counter.csv")
-        mean_df = pd.read_csv('./mean_df_dip.csv')
-        max_df = pd.read_csv('./max_df_dip.csv')
-        min_df = pd.read_csv('./min_df_dip.csv')
+        counter = pd.read_csv("./csv_db/counter.csv")
+        mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
+        max_df = pd.read_csv('./csv_db/max_df_dip.csv')
+        min_df = pd.read_csv('./csv_db/min_df_dip.csv')
 
-        dip_template = pd.read_csv('./Diploma_template.csv')
+        dip_template = pd.read_csv('./csv_db/Diploma_template.csv')
         
         infile = open('regression_model_diploma','rb')
         regression_model_diploma = pickle.load(infile)
@@ -132,11 +132,11 @@ def prediction():
             counter.to_csv('counter.csv',index=False)
         
     else:
-        counter = pd.read_csv("./counter.csv")
-        mean_df = pd.read_csv('./mean_df.csv')
-        max_df = pd.read_csv('./max_df.csv')
-        min_df = pd.read_csv('./min_df.csv')
-        template = pd.read_csv('./template.csv')
+        counter = pd.read_csv("./csv_db/counter.csv")
+        mean_df = pd.read_csv('./csv_db/mean_df.csv')
+        max_df = pd.read_csv('./csv_db/max_df.csv')
+        min_df = pd.read_csv('./csv_db/min_df.csv')
+        template = pd.read_csv('./csv_db/template.csv')
 
 
         college_code_list = mean_df['college_code'].unique()
@@ -246,35 +246,449 @@ def prediction():
 
 def analysis():
     import streamlit as st
-    st.write('Game')
-def compare():
     import streamlit as st
-    import time
+    import pandas as pd
     import numpy as np
-    st.markdown(
-        """
-        This is compare    
-        """
-    )
-    progress_bar = st.sidebar.progress(0)
-    status_text = st.sidebar.empty()
-    last_rows = np.random.randn(1, 1)
-    chart = st.line_chart(last_rows)
+    import pickle
+    import plotly.graph_objects as go
+    import plotly.express as px 
 
-    for i in range(1, 101):
-        new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-        status_text.text("%i%% Complete" % i)
-        chart.add_rows(new_rows)
-        progress_bar.progress(i)
-        last_rows = new_rows
-        time.sleep(0.05)
+    mean_df = pd.read_csv('./csv_db/mean_df.csv')
+    max_df = pd.read_csv('./csv_db/max_df.csv')
+    min_df = pd.read_csv('./csv_db/min_df.csv')
+    
+    anl_sel = st.sidebar.radio("Select what insights you want to see and compare",('Internal Vs External Gradings','Regular Vs Diploma Students',
+                                'Oral/Viva Vs Theory Exam','Best & Worst college Rankings','Consistent college Ranking','Top ellective Subjects',
+                                'Ellected Subject & performance','Department Wise performance','Student Friendly college Rankings'))
+                                
+    if anl_sel == 'Internal Vs External Gradings':
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+            
+        if dip_sel:
+            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
+            max_df = pd.read_csv('./csv_db/max_df_dip.csv')
+            min_df = pd.read_csv('./csv_db/min_df_dip.csv')
+            sem_1,sem_2 = None,None
+        college_code_list = mean_df['college_code'].unique()
+        mul_coll = st.multiselect("Choose Multiple Colleges / CollegeCodes to compare", list(college_code_list),default=['124:MGMCET','126:SAKEC','174:RAIT','17:BVCE'])
+        lis= []
+        for x in mul_coll:
+            lis.append(mean_df[mean_df['college_code']==x]['department'].unique())
+        if len(mul_coll)!= 0:
+            com_dept = list(set.intersection(*map(set,lis )))
+            sub_dep = st.selectbox("Choose Common Departments based on selected colleges to compare ", list(com_dept))
+        cal_sub = st.radio("Select metric to compute",
+                            ('Average',  'Max','Min'))
+        fig = go.Figure()
+        for sub_college in mul_coll:    
+            mean_college = []
+            max_college = []
+            min_college = []
+            if dip_sel:
+                sem_list = ['sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+                sem = ["SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+            else : 
+                sem_list  = ['sem_1','sem_2','sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+                sem = ["SEM I","SEM II","SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+            for x in sem_list:
 
-    progress_bar.empty()
+                    if cal_sub == 'Average':
+                        mean_college.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))               
+                    if cal_sub == 'Max':
+                        max_college.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
+                    if cal_sub == 'Min':
+                        min_college.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
+            
+            
+            # Add scatter trace for line
+            fig.add_trace(go.Scatter(x=sem, y=max_college, name= sub_college +' Max',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=sem, y=mean_college, name= sub_college + ' Average',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=sem, y=min_college, name = sub_college + ' Min',
+                                    line=dict( width=4)))
 
-    # Streamlit widgets automatically run the script from top to bottom. Since
-    # this button is not connected to any other logic, it just causes a plain
-    # rerun.
-    st.button("Re-run")
+            if dip_sel == False:
+                                
+                fig.update_layout(
+                    shapes=[
+                        # 1st highlight
+                        dict(
+                            type="rect",
+                            # x-reference is assigned to the x-values
+                            xref="x",
+                            # y-reference is assigned to the plot paper [0,1]
+                            yref="paper",
+                            x0="SEM I",
+                            y0=0,
+                            x1="SEM III",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM III",
+                            y0=0,
+                            x1="SEM VI",
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM VI",
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
+            else : 
+                 fig.update_layout(
+                    shapes=[
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM III",
+                            y0=0,
+                            x1="SEM VI",
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM VI",
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
+        st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.plotly_chart(fig)
+    if anl_sel == 'Regular Vs Diploma Students' :   
+        mean_df_d = pd.read_csv('./csv_db/mean_df_dip.csv')
+        max_df_d = pd.read_csv('./csv_db/max_df_dip.csv')
+        min_df_d = pd.read_csv('./csv_db/min_df_dip.csv')
+        mean_df_r = pd.read_csv('./csv_db/mean_df.csv')
+        max_df_r = pd.read_csv('./csv_db/max_df.csv')
+        min_df_r = pd.read_csv('./csv_db/min_df.csv')
+        
+        
+        college_code_list = mean_df_d['college_code'].unique()
+        sub_college = st.selectbox("Choose College / CollegeCode to compare", list(college_code_list))
+        com_dept = (mean_df_d[mean_df_d['college_code']==sub_college]['department'].unique())
+        sub_dep = st.selectbox("Choose Department based on selected college to compare ", list(com_dept))
+
+        mean_college_d = [None,None]
+        max_college_d = [None,None]
+        min_college_d = [None,None]
+        mean_college_r = []
+        max_college_r = []
+        min_college_r = []
+        sem_list_d = ['sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+       # sem = ["SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+        sem_list_r = ['sem_1','sem_2','sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+        sem = ["SEM I","SEM II","SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+
+        cal_sub = st.radio("Select metric to compute",
+                            ('Average',  'Max','Min'))
+        for x in sem_list_r:
+
+                if cal_sub == 'Average':
+                    mean_college_r.append(float(mean_df_r[(mean_df_r['college_code']==sub_college) & (mean_df_r['department']==sub_dep)][x]))               
+                if cal_sub == 'Max':
+                    max_college_r.append(float(max_df_r[(max_df_r['college_code']==sub_college) & (max_df_r['department']==sub_dep)][x]))
+                if cal_sub == 'Min':
+                    min_college_r.append(float(min_df_r[(min_df_r['college_code']==sub_college) & (min_df_r['department']==sub_dep)][x]))
+        for x in sem_list_d:
+
+                if cal_sub == 'Average':
+                    mean_college_d.append(float(mean_df_d[(mean_df_d['college_code']==sub_college) & (mean_df_d['department']==sub_dep)][x]))               
+                if cal_sub == 'Max':
+                    max_college_d.append(float(max_df_d[(max_df_d['college_code']==sub_college) & (max_df_d['department']==sub_dep)][x]))
+                if cal_sub == 'Min':
+                    min_college_d.append(float(min_df_d[(min_df_d['college_code']==sub_college) & (min_df_d['department']==sub_dep)][x]))
+        
+        fig = go.Figure()
+        # Add scatter trace for line
+        if cal_sub == 'Max':
+
+            fig.add_trace(go.Scatter(x=sem, y=max_college_r, name= 'Regular Max',
+                                line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=sem, y=max_college_d, name= 'Diploma Max',
+                                line=dict( width=4)))
+        if cal_sub == 'Average':
+
+            fig.add_trace(go.Scatter(x=sem, y=mean_college_r, name=  'Regular Average',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=sem, y=mean_college_d, name= 'Diploma Average',
+                                    line=dict( width=4)))
+            
+        if cal_sub == 'Min':
+            fig.add_trace(go.Scatter(x=sem, y=min_college_r, name =  'Regular Min',
+                                line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=sem, y=min_college_d, name =  'Diploma Min',
+                                line=dict( width=4)))
+
+
+        fig.update_layout(
+                shapes=[
+                    # 2nd highlight
+                    dict(
+                        type="rect",
+                        xref="x",
+                        yref="paper",
+                        x0="SEM III",
+                        y0=0,
+                        x1="SEM VI",
+                        y1=1,
+                        fillcolor="LIGHTSALMON",
+                        opacity=0.7,
+                        layer="below",
+                        line_width=0,
+                    ),
+                    # 3rd highlight 
+                    dict(
+                        type="rect",
+                        xref="x",
+                        yref="paper",
+                        x0="SEM VI",
+                        y0=0,
+                        x1="SEM VIII",
+                        y1=1,
+                        fillcolor="mediumspringgreen",
+                        opacity=0.6,
+                        layer="below",
+                        line_width=0,
+                    )
+                ]
+            )
+        st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.plotly_chart(fig)
+    if anl_sel == 'Oral/Viva Vs Theory Exam':
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+            
+        if dip_sel:
+            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
+            max_df = pd.read_csv('./csv_db/max_df_dip.csv')
+            min_df = pd.read_csv('./csv_db/min_df_dip.csv')
+            sem_1,sem_2 = None,None
+        college_code_list = mean_df['college_code'].unique()
+        mul_coll = st.multiselect("Choose Multiple Colleges / CollegeCodes to compare", list(college_code_list),default=['124:MGMCET','126:SAKEC','174:RAIT','17:BVCE'])
+        lis= []
+        for x in mul_coll:
+            lis.append(mean_df[mean_df['college_code']==x]['department'].unique())
+        if len(mul_coll)!= 0:
+            com_dept = list(set.intersection(*map(set,lis )))
+            sub_dep = st.selectbox("Choose Common Departments based on selected colleges to compare ", list(com_dept))
+        cal_sub = st.radio("Select metric to compute",
+                            ('Average',  'Max','Min'))
+        sel_sub = st.radio("Select Oral/Internal to compare",
+                            ('Term Work(TW)','Oral(OR)','Internal Grading(IN)'))
+        fig = go.Figure()
+        for sub_college in mul_coll:    # to loop through the selected colleges 
+            tw_mean = []
+            th_mean = []
+            in_mean = []
+            or_mean = []
+            tw_max = []
+            th_max = []
+            in_max = []
+            or_max = []
+            tw_min= []
+            th_min = []
+            in_min = []
+            or_min = []
+            
+            sem_list = ['c1_th','c1_tw','c1_or','c1_in','c2_th','c2_tw','c2_in','c3_th','c3_tw','c3_in','c3_or','c4_th','c4_tw','c4_in']
+            x_label = ["Course I","Course II","Course III","Course IV"]
+    
+            if cal_sub == 'Average':
+                for x in ['c1_th','c2_th','c3_th','c4_th']:
+                    th_mean.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))
+                if sel_sub == 'Oral(OR)':
+                    for x in ['c1_or' ,'c3_or' ]:
+                        or_mean.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))
+                if sel_sub == 'Term Work(TW)' :
+                    for x in ['c1_tw','c2_tw','c3_tw','c4_tw']:
+                        tw_mean.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))
+                if sel_sub =='Internal Grading(IN)' :
+                    for x in ['c1_in','c2_in','c3_in','c4_in']:
+                        in_mean.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))                   
+            if cal_sub == 'Max':
+                for x in ['c1_th','c2_th','c3_th','c4_th']:
+                    th_max.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
+                if sel_sub == 'Oral(OR)':
+                    for x in ['c1_or' ,'c3_or' ]:
+                        or_max.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
+                if sel_sub == 'Term Work(TW)' :
+                    for x in ['c1_tw','c2_tw','c3_tw','c4_tw']:
+                        tw_max.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
+                if sel_sub =='Internal Grading(IN)' :
+                    for x in ['c1_in','c2_in','c3_in','c4_in']:
+                        in_max.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))   
+            if cal_sub == 'Min':
+                for x in ['c1_th','c2_th','c3_th','c4_th']:
+                    th_min.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
+                if sel_sub == 'Oral(OR)':
+                    for x in ['c1_or' ,'c3_or' ]:
+                        or_min.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
+                if sel_sub == 'Term Work(TW)' :
+                    for x in ['c1_tw','c2_tw','c3_tw','c4_tw']:
+                        tw_min.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
+                if sel_sub =='Internal Grading(IN)' :
+                    for x in ['c1_in','c2_in','c3_in','c4_in']:
+                        in_min.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))   
+    
+            
+            # Add scatter trace for line
+            fig.add_trace(go.Scatter(x=x_label, y=th_max, name= 'TH'+sub_college [:3] +' Max',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=tw_max, name= 'TW'+sub_college [:3] +' Max',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=or_max, name= 'OR'+sub_college [:3] +' Max',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=in_max, name= 'IN'+sub_college [:3] +' Max',
+                                    line=dict( width=4)))  
+            
+                                    
+            fig.add_trace(go.Scatter(x=x_label, y=th_mean, name= 'TH '+sub_college [:3] +' Average',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=tw_mean, name= 'TW '+sub_college [:3] +' Average',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=or_mean, name= 'OR '+sub_college [:3] +' Average',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=in_mean, name= 'IN '+sub_college [:3] +' Average',
+                                    line=dict( width=4)))
+                                    
+            fig.add_trace(go.Scatter(x=x_label, y=th_min, name= 'TH '+sub_college [:3] +' Min',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=tw_min, name= 'TW '+sub_college [:3] +' Min',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=or_min, name= 'OR '+sub_college [:3] +' Min',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=x_label, y=in_min, name= 'IN'+sub_college [:3] +' Min',
+                                    line=dict( width=4)))
+            
+            if dip_sel == False:
+                                
+                fig.update_layout(
+                    shapes=[
+                        # 1st highlight
+                        dict(
+                            type="rect",
+                            # x-reference is assigned to the x-values
+                            xref="x",
+                            # y-reference is assigned to the plot paper [0,1]
+                            yref="paper",
+                            x0="SEM I",
+                            y0=0,
+                            x1="SEM III",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM III",
+                            y0=0,
+                            x1="SEM VI",
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM VI",
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
+            else : 
+                 fig.update_layout(
+                    shapes=[
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM III",
+                            y0=0,
+                            x1="SEM VI",
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM VI",
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
+        st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.plotly_chart(fig)
+
+
+
 
 def contribute():
     import streamlit as st
