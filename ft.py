@@ -686,7 +686,210 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
+    if anl_sel == 'Best & Worst college Rankings':
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+        mean_df = pd.read_csv('./csv_db/mean_df.csv')   
+        if dip_sel:
+            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
+        import plotly.graph_objects as go
+        import pandas as pd
 
+        df_pre = mean_df.groupby(['college_code']).mean().round(2)
+        df_pre.reset_index(inplace=True)
+        df_pre.sort_values(by=['cgpi'], inplace=True, ascending=False) 
+        df_pre['rank']=df_pre['cgpi'].rank(ascending = 0).astype(int)
+        df_pre.set_index('rank',inplace=True)
+        #st.write(df_pre[['college_code','cgpi']])
+        fig = go.Figure(data=[go.Table(
+        header=dict(values=list(['Ranks','College','CGPI']),
+            fill_color='paleturquoise',
+            align='left'),
+        cells=dict(values=[df_pre.index, df_pre.college_code, df_pre.cgpi],
+            fill_color='lavender',
+            align='left'))
+        ])
+
+        st.plotly_chart(fig)
+
+
+        dep_pre = mean_df.groupby(['college_code','department']).mean().round(2)
+        dep_pre.reset_index(inplace=True)
+        
+        
+
+
+
+
+        st.write('According to departments/streams')
+
+
+        department_list = mean_df['department'].unique()
+       
+        sub_dep = st.selectbox("Choose department/stream to see ranking ", list(department_list))
+        dep_pre=dep_pre[dep_pre['department']==sub_dep][['college_code','department','cgpi']]
+        dep_pre.sort_values(by=['cgpi'], inplace=True, ascending=False)
+        dep_pre['rank']=dep_pre['cgpi'].rank(ascending = 0).astype(int)
+        dep_pre.set_index('rank',inplace=True)
+        
+
+
+
+        
+
+
+        fig = go.Figure(data=[go.Table(
+        header=dict(values=list(['Ranks','College','Department','CGPI']),
+            fill_color='paleturquoise',
+            align='left'),
+        cells=dict(values=[dep_pre.index,dep_pre.college_code, dep_pre.department , dep_pre.cgpi],
+            fill_color='lavender',
+            align='left'))
+        ])
+
+        st.plotly_chart(fig)
+    
+    if anl_sel == 'Consistent college Ranking':
+        import statistics
+        import plotly.graph_objects as go
+        import pandas as pd
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+        mean_df = pd.read_csv('./csv_db/mean_df.csv')
+        if dip_sel:
+            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
+            sem_1,sem_2 = None,None
+        
+        mean_df['stddev']=1
+        for index,x in mean_df.iterrows():
+            mean_df['stddev'][index]=statistics.mean([x.sem_1,x.sem_2,x.sem_3,x.sem_4,x.sem_5,x.sem_6,x.sem_7,x.sem_8])
+        mean_df = mean_df.groupby(['college_code']).std()
+        mean_df.reset_index(inplace=True)
+        mean_df.sort_values(by=['stddev'], inplace=True, ascending=True) 
+        mean_df['rank']=mean_df['stddev'].rank(ascending = 1)
+        mean_df.set_index('rank',inplace = True)
+        fig = go.Figure(data=[go.Table(
+        header=dict(values=list(['College','Deviation']),
+            fill_color='paleturquoise',
+            align='left'),
+        cells=dict(values=[mean_df.index[:-2],mean_df.college_code],
+            fill_color='lavender',
+            align='left'))
+        ])
+
+        st.plotly_chart(fig)
+
+        
+        st.write("Specific's of  college")
+
+        college_code_list = mean_df['college_code'].unique()
+        mul_coll = st.multiselect("Choose Multiple Colleges / CollegeCodes to compare", list(college_code_list),default=['124:MGMCET','126:SAKEC','174:RAIT','17:BVCE'])
+        sem_list=[]
+        
+        
+        fig = go.Figure()
+        for sub_college in mul_coll:    
+            mean_college = []
+           
+            if dip_sel:
+                sem_list = ['sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+                sem = ["SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+            else : 
+                sem_list  = ['sem_1','sem_2','sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+                sem = ["SEM I","SEM II","SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+            for x in sem_list:
+                mean_college.append(float(mean_df[(mean_df['college_code']==sub_college)][x]))               
+             
+            
+            
+            
+            fig.add_trace(go.Scatter(x=sem, y=mean_college, name= sub_college + ' Average',
+                                    line=dict( width=4)))
+            
+            if dip_sel == False:
+                                
+                fig.update_layout(
+                    shapes=[
+                        # 1st highlight
+                        dict(
+                            type="rect",
+                            # x-reference is assigned to the x-values
+                            xref="x",
+                            # y-reference is assigned to the plot paper [0,1]
+                            yref="paper",
+                            x0="SEM I",
+                            y0=0,
+                            x1="SEM III",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM III",
+                            y0=0,
+                            x1="SEM VI",
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM VI",
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
+            else : 
+                 fig.update_layout(
+                    shapes=[
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM III",
+                            y0=0,
+                            x1="SEM VI",
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM VI",
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
+        st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.plotly_chart(fig)
 
 
 
