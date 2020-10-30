@@ -686,6 +686,7 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
+    
     if anl_sel == 'Best & Worst college Rankings':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
         mean_df = pd.read_csv('./csv_db/mean_df.csv')   
@@ -890,6 +891,17 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
+    
+    if anl_sel == 'Consistent college Ranking':
+        import statistics
+        import plotly.graph_objects as go
+        import pandas as pd
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+        data = pd.read_csv('./csv_db/regular.csv')
+        if dip_sel:
+            data = pd.read_csv('./csv_db/diploma.csv')
+            sem_1,sem_2 = None,None
+        new = data.groupby(['college_code','elective','department']).max()
 
 
 
