@@ -16,7 +16,7 @@ LOGGER = get_logger(__name__)
 # demo_name -> (demo_ft, demo_description)  
 ft = OrderedDict(
     [
-        ("-", (ft.about,None)),
+        ("About", (ft.about,None)),
         (
             "Prediction",
             (
@@ -52,13 +52,13 @@ This demo shows how to use `st.write` to visualize Pandas DataFrames.
             ),
         ),
         (
-            "Suggestion",
+            "Wait for these feature",
             (
                 ft.suggestion,
             )
         ),
         (
-            "How it works ?",
+            "Wait for these feature",
             (
                 ft.working,
             )

@@ -8,15 +8,61 @@ def about():
     
     st.markdown(
         """ <p style="color:red">
-         <b>Note</b> - Change the parameters on left menu and if its not present hit on arrow at top left , you will get a menubar.
-        If your using mobile device then you might require to hit arrow frequently as it gets hidden due to  diplay size is small.
-        For best experience use Desktop 
+         <b>Note</b> -Change the parameters on the left menu and if it's not present hit on the arrow at the top left, you will get a menubar.
+          If you are using a mobile device then you might require to hit the arrow frequently as it gets hidden due to the small display size. 
+         For best experience <b>use Desktop</b> 
         </p>
 
 
         """,unsafe_allow_html=True
 
     )
+    st.markdown(
+        """ <p ><b><h3>About me ?</h3></b>
+       I am an enthusiastic Data Scientist always looking for a solution that makes a difference. 
+       I am currently working on independent projects that help society. 
+       While doing so I am exploring and learning the required skills and knowledge. 
+       I have Graduated from MGM.
+        </p>
+
+
+        """,unsafe_allow_html=True
+
+    )
+    
+    st.markdown(
+        """ <p ><b><h3> Why this Mumbai University Engineering Project ?</h3></b>
+         <b> Mumbai University </b> is one of the well known and has the most number of students graduating per year not only in Maharashtra but all over India.
+         Though there is not a well-recognized platform/website that helps students to compare colleges on basis of grades. And this is a major pit-fall for students.
+         They don't know what will be their grades and are they good enough, compared to other colleges when he/she gets graduated and competing with all others for the job. 
+         There is no guarantee that a good grade will land you a job, but is definitely a gateway for an interview.
+         Whereas if you pass out from low grading college, getting into the interview itself is a struggle as you would be well under the cutoff mentioned.
+        </p>
+
+
+        """,unsafe_allow_html=True
+
+    )
+    st.markdown(
+        """ <p ><b><h3>Challenges Faced ?</h3></b>
+        I have worked on many data science projects, but most of them are learning/simplified one to understand the concepts well. 
+        Here you don't have data as readily available. You need to -<br><b>
+        ➸ Source data <br>
+        ➸ Transform data into a structure <br>
+        ➸ Preprocess data <br>
+        ➸ EDA <br>
+        ➸ Modeling <br>
+        ➸ Deployment <br>
+        ➸ Maintenance <br> </b>
+        While learning from any educational platform some key aspects are missing. 
+        This project is one of those where you are challenged and asked to push over your boundaries when you're new at it.
+        </p>
+
+
+        """,unsafe_allow_html=True
+
+    )
+    
 
     st.sidebar.success("Select from Menu 👆 ")
 
@@ -49,8 +95,8 @@ def prediction():
     st.markdown(
         """ <p style="color:red">
          <b>Note</b> - Change the parameters on left menu and if its not present hit on arrow at top left , you will get a menubar.
-        If your using mobile device then you might require to hit arrow frequently as it gets hidden due to  diplay size is small.
-        For best experience use Desktop 
+        If you are using mobile device then you might require to hit arrow frequently as it gets hidden due to small  diplay size.
+        For best experience use <b>Desktop</b> 
         </p>
 
 
@@ -129,7 +175,7 @@ def prediction():
                                 'sem_3': sem_3,            'sem_4': sem_4,        'sem_5':sem_5 ,
                                 'sem_6': sem_6,            'sem_7': sem_7 , 'sem_8':sem_8, 'cgpi':cgpi , 'type':'Diploma'}
             counter = counter.append(row,ignore_index =True)
-            counter.to_csv('counter.csv',index=False)
+            counter.to_csv('./csv_db/counter.csv',index=False)
         
     else:
         counter = pd.read_csv("./csv_db/counter.csv")
@@ -205,7 +251,7 @@ def prediction():
                                 'sem_3': sem_3,            'sem_4': sem_4,        'sem_5':sem_5 ,
                                 'sem_6': sem_6,            'sem_7': sem_7 , 'sem_8':sem_8, 'cgpi':cgpi , 'type':'Regular'}
             counter = counter.append(row,ignore_index =True)
-            counter.to_csv('counter.csv',index=False)
+            counter.to_csv('./csv_db/counter.csv',index=False)
             
     
             
@@ -258,8 +304,8 @@ def analysis():
     min_df = pd.read_csv('./csv_db/min_df.csv')
     
     anl_sel = st.sidebar.radio("Select what insights you want to see and compare",('Internal Vs External Gradings','Regular Vs Diploma Students',
-                                'Oral/Viva Vs Theory Exam','Best & Worst college Rankings','Consistent college Ranking','Top ellective Subjects',
-                                'Ellected Subject & performance','Department Wise performance','Student Friendly college Rankings'))
+                                'Oral/Viva Vs Theory Exam','Best & Worst college Rankings','Consistent college Ranking','Top elective Subjects',
+                                'Ellected Subject & performance','Department Wise performance'))
                                 
     if anl_sel == 'Internal Vs External Gradings':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
@@ -394,6 +440,7 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
+    
     if anl_sel == 'Regular Vs Diploma Students' :   
         mean_df_d = pd.read_csv('./csv_db/mean_df_dip.csv')
         max_df_d = pd.read_csv('./csv_db/max_df_dip.csv')
@@ -495,6 +542,7 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
+    
     if anl_sel == 'Oral/Viva Vs Theory Exam':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
             
@@ -753,11 +801,8 @@ def analysis():
         import statistics
         import plotly.graph_objects as go
         import pandas as pd
-        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+        
         mean_df = pd.read_csv('./csv_db/mean_df.csv')
-        if dip_sel:
-            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
-            sem_1,sem_2 = None,None
         
         mean_df['stddev']=1
         for index,x in mean_df.iterrows():
@@ -766,9 +811,11 @@ def analysis():
         mean_df.reset_index(inplace=True)
         mean_df.sort_values(by=['stddev'], inplace=True, ascending=True) 
         mean_df['rank']=mean_df['stddev'].rank(ascending = 1)
-        mean_df.set_index('rank',inplace = True)
+        mean_df.reset_index(inplace = True)
+        mean_df.index = np.arange(1, len(mean_df) + 1)
+
         fig = go.Figure(data=[go.Table(
-        header=dict(values=list(['College','Deviation']),
+        header=dict(values=list(['Ranks','College']),
             fill_color='paleturquoise',
             align='left'),
         cells=dict(values=[mean_df.index[:-2],mean_df.college_code],
@@ -790,12 +837,8 @@ def analysis():
         for sub_college in mul_coll:    
             mean_college = []
            
-            if dip_sel:
-                sem_list = ['sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
-                sem = ["SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
-            else : 
-                sem_list  = ['sem_1','sem_2','sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
-                sem = ["SEM I","SEM II","SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+            sem_list  = ['sem_1','sem_2','sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+            sem = ["SEM I","SEM II","SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
             for x in sem_list:
                 mean_college.append(float(mean_df[(mean_df['college_code']==sub_college)][x]))               
              
@@ -805,9 +848,171 @@ def analysis():
             fig.add_trace(go.Scatter(x=sem, y=mean_college, name= sub_college + ' Average',
                                     line=dict( width=4)))
             
+            fig.update_layout(
+                    shapes=[
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM III",
+                            y0=0,
+                            x1="SEM VI",
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0="SEM VI",
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
+        st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.plotly_chart(fig)
+    
+    if anl_sel == 'Top elective Subjects':
+        import statistics
+        import plotly.graph_objects as go
+        import pandas as pd
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+        data = pd.read_csv('./csv_db/regular.csv')
+        if dip_sel:
+            data = pd.read_csv('./csv_db/diploma.csv')
+            sem_1,sem_2 = None,None
+        new = data.groupby(['college_code','elective','department']).max()
+        new.reset_index(inplace=True)
+        max_elec = new['elective'].value_counts().rename_axis('counts').reset_index(name='elective')  #new['elective'].value_counts()
+        #st.write(max_elec['elective'])
+
+
+        fig = go.Figure(data=[go.Table(
+        header=dict(values=list(['Elective Subjects','Max elected Counts']),
+            fill_color='paleturquoise',
+            align='left'),
+        cells=dict(values=[max_elec.counts, max_elec['elective']],
+            fill_color='lavender',
+            align='left'))
+        ])
+
+        st.plotly_chart(fig)
+
+        
+
+        st.write('According to departments/streams')
+
+
+        department_list = mean_df['department'].unique()
+       
+        sub_dep = st.selectbox("Choose department/stream to see ranking ", list(department_list))
+        
+        new = data[data['department']==sub_dep].groupby(['college_code','elective','department']).count()
+        new.reset_index(inplace=True)
+        max_elec = new['elective'].value_counts().rename_axis('counts').reset_index(name='elective')  #new['elective'].value_counts()
+        #st.write(max_elec['elective'])
+
+
+        fig = go.Figure(data=[go.Table(
+        header=dict(values=list(['Elective Subjects','Max elected Counts']),
+            fill_color='paleturquoise',
+            align='left'),
+        cells=dict(values=[max_elec.counts, max_elec['elective']],
+            fill_color='lavender',
+            align='left'))
+        ])
+
+        st.plotly_chart(fig)
+
+    if anl_sel == 'Ellected Subject & performance':
+        import plotly.express as px
+
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+        data = pd.read_csv('./csv_db/regular.csv')
+        if dip_sel:
+            data = pd.read_csv('./csv_db/diploma.csv')
+            sem_1,sem_2 = None,None
+        department_list = mean_df['department'].unique()
+       
+        sub_dep = st.selectbox("Choose department/stream to see ranking ", list(department_list))
+        cal_sub = st.radio("Select metric to compute",
+                            ('Average',  'Max','Min'))
+        
+        if cal_sub == 'Average':
+            new = data.groupby(['department','elective'],as_index=False)['c3_th'].mean()
+        if cal_sub == 'Max':
+            new = data.groupby(['department','elective'],as_index=False)['c3_th'].max()
+        if cal_sub == 'Min':
+            new = data.groupby(['department','elective'],as_index=False)['c3_th'].min()
+        new_df = new[(new['department']==sub_dep)][['elective','c3_th']]
+
+
+        fig = px.bar(new_df, x='elective', y='c3_th',color='c3_th',color_continuous_scale='rdylbu')
+        st.plotly_chart(fig)
+    
+
+    if anl_sel == 'Department Wise performance':
+        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
+            
+        if dip_sel:
+            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
+            max_df = pd.read_csv('./csv_db/max_df_dip.csv')
+            min_df = pd.read_csv('./csv_db/min_df_dip.csv')
+            sem_1,sem_2 = None,None
+        college_code_list = mean_df['college_code'].unique()
+        sub_college = st.selectbox("Choose Multiple Colleges / CollegeCodes to compare", list(college_code_list))
+       
+        cal_sub = st.radio("Select metric to compute",
+                            ('Average',  'Max','Min'))
+        fig = go.Figure()
+        mul_coll = min_df[min_df['college_code']==sub_college]['department'].unique()
+        for sub_dep in mul_coll:    
+            mean_college = []
+            max_college = []
+            min_college = []
+            #st.write((mul_coll))
+            if dip_sel:
+                sem_list = ['sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+                sem = ["SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+            else : 
+                sem_list  = ['sem_1','sem_2','sem_3','sem_4','sem_5','sem_6','sem_7','sem_8','cgpi']
+                sem = ["SEM I","SEM II","SEM III","SEM IV","SEM V","SEM VI","SEM VII","SEM VIII","CGPI"]
+            for x in sem_list:
+
+                    if cal_sub == 'Average':
+                        mean_college.append(float(mean_df[(mean_df['college_code']==sub_college) & (mean_df['department']==sub_dep)][x]))               
+                    if cal_sub == 'Max':
+                        max_college.append(float(max_df[(max_df['college_code']==sub_college) & (max_df['department']==sub_dep)][x]))
+                    if cal_sub == 'Min':
+                        min_college.append(float(min_df[(min_df['college_code']==sub_college) & (min_df['department']==sub_dep)][x]))
+                       # st.write(min_college)
+            
+            
+            # Add scatter trace for line
+            fig.add_trace(go.Scatter(x=sem, y=max_college, name= sub_dep +' Max',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=sem, y=mean_college, name= sub_dep + ' Average',
+                                    line=dict( width=4)))
+            fig.add_trace(go.Scatter(x=sem, y=min_college, name = sub_dep + ' Min',
+                                    line=dict( width=4)))
+           
+
             if dip_sel == False:
                                 
                 fig.update_layout(
+                    legend=dict(orientation="h"),
                     shapes=[
                         # 1st highlight
                         dict(
@@ -857,6 +1062,8 @@ def analysis():
                 )
             else : 
                  fig.update_layout(
+                     
+                    legend=dict(orientation="h"),
                     shapes=[
                         # 2nd highlight
                         dict(
@@ -891,50 +1098,22 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
-    
-    if anl_sel == 'Consistent college Ranking':
-        import statistics
-        import plotly.graph_objects as go
-        import pandas as pd
-        dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
-        data = pd.read_csv('./csv_db/regular.csv')
-        if dip_sel:
-            data = pd.read_csv('./csv_db/diploma.csv')
-            sem_1,sem_2 = None,None
-        new = data.groupby(['college_code','elective','department']).max()
-
-
 
 def contribute():
     import streamlit as st
-    import time
-    import numpy as np
-
-
-    st.markdown(
-        """
-        This is Contribute    
-        """
-    )
-    progress_bar = st.sidebar.progress(0)
-    status_text = st.sidebar.empty()
-    last_rows = np.random.randn(1, 1)
-    chart = st.line_chart(last_rows)
-
-    for i in range(1, 101):
-        new_rows = last_rows[-1, :] + np.random.randn(5, 1).cumsum(axis=0)
-        status_text.text("%i%% Complete" % i)
-        chart.add_rows(new_rows)
-        progress_bar.progress(i)
-        last_rows = new_rows
-        time.sleep(0.05)
-
-    progress_bar.empty()
-
-    # Streamlit widgets automatically run the script from top to bottom. Since
-    # this button is not connected to any other logic, it just causes a plain
-    # rerun.
-    st.button("Re-run")
+    from PIL import Image
+    st.write('You can contribute in many ways not only to me but your friends.Those who need to choose college, one who are in college. So that they can normalize their expectations .See the pitfalls, dips in grades of college, and perform accordingly')
+    st.write('You can share my profile and help me land a Job',unsafe_allow_html=True)
+    #<a href="https://www.linkedin.com/in/rushikeshgholap/"> Rushikesh Gholap</a> 
+    st.write('<a href="https://www.linkedin.com/in/rushikeshgholap/"> LinkedIn    </a> <br> <a href="https://github.com/RushikeshGholap"> Github </a> <br> <a href="mailto:rushikeshbgholap?Subject=Job" target="_top">Email</a>',unsafe_allow_html=True)
+    #st.write('You can share my profile and help me land a Job',unsafe_allow_html=True)
+    st.write('You can donate me via upi- rushikesh131998@oksbi')
+    st.write('Or can click here <a href="upi://pay?pa=rushikesh131998@oksbi&pn=rushikesh gholap&aid=ugicagicansjmug"> Donate</a>',unsafe_allow_html=True)
+    qr = st.button('Scan QR Code')
+    
+    if qr:
+        image = Image.open('upi.jpg')
+        st.image(image, width=300)
 
 
 # fmt: on
@@ -944,16 +1123,42 @@ def contribute():
 # fmt: off
 def suggestion():
     import streamlit as st
+    import pandas as pd
+    sub = True
     st.markdown(
         """
-        This is suggestion    
+Feel free to give your suggestions and feedback
         """
     )
+    user_name = st.text_input("Enter Name * ")
+    if user_name == '':
+        st.write('Name not entered')
+        sub = False
+    
+    user_contact = st.text_input("Enter your contact (like email,number,etc) *")
+    if user_contact == '':
+        sub = False
+        st.write('Contact not entered')
+    
+    user_input = st.text_input("Enter your suggestions/feedback here *")
+    if user_input == '':
+        sub = False
+        st.write('Suggestion/feedback not entered')
+    
+    if sub:
+        success = st.button('Submit')
+        sugges = {'name':user_name,'contact':user_contact,'suggestion':user_input}
+        if success:
+            suggestion = pd.read_csv('./csv_db/suggestion.csv')
+            suggestion =  suggestion.append(sugges,ignore_index =True)
+            suggestion.to_csv('./csv_db/suggestion.csv',index =False)
+            user_name,user_contact,user_input  = '','',''
+            st.success('Thank you for suggestion/feedback.')
+
 def working():
     import streamlit as st
     st.markdown(
         """
-        This is how it works    
-        """
+Wait for this feature        """
     )
     st.write('done')
