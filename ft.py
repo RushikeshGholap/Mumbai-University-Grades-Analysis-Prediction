@@ -62,9 +62,9 @@ def about():
         """,unsafe_allow_html=True
 
     )
-    
+    st.video('abc')
 
-    st.sidebar.success("Select from Menu 👆 ")
+    st.sidebar.success("Select from Menu above ")
 
    
 
@@ -278,7 +278,7 @@ def prediction():
                     yaxis_title='Pointers',height=550)
     fig.update_yaxes(tickvals=[0,1,2,3,4,5,6,7,8,9,10])
     st.plotly_chart(fig)
-
+    st.write("The prediction above can be within range of ±0.5 given the conditions are ideal as before.consider this predictions as current rate of scoring and adjust your performance according to desire cgpi.")
    
     st.write(" <b >Predictions performed Counter: <i style ='color:red'>%.0f</i> </b>"%counter.shape[0], unsafe_allow_html=True)
     df = counter['type'].value_counts().rename_axis('Type').reset_index(name='Counts')
@@ -304,8 +304,8 @@ def analysis():
     min_df = pd.read_csv('./csv_db/min_df.csv')
     
     anl_sel = st.sidebar.radio("Select what insights you want to see and compare",('Internal Vs External Gradings','Regular Vs Diploma Students',
-                                'Oral/Viva Vs Theory Exam','Best & Worst college Rankings','Consistent college Ranking','Top elective Subjects',
-                                'Ellected Subject & performance','Department Wise performance'))
+                                'Oral/Viva Vs Theory Exam','Best college Rankings','Consistent college Ranking','Top elective Subjects',
+                                'Elected Subject & performance','Department Wise performance'))
                                 
     if anl_sel == 'Internal Vs External Gradings':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
@@ -365,9 +365,9 @@ def analysis():
                             xref="x",
                             # y-reference is assigned to the plot paper [0,1]
                             yref="paper",
-                            x0="SEM I",
+                            x0=0,
                             y0=0,
-                            x1="SEM III",
+                            x1=1.5,
                             y1=1,
                             fillcolor="mediumspringgreen",
                             opacity=0.6,
@@ -379,9 +379,9 @@ def analysis():
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM III",
+                            x0=1.5,
                             y0=0,
-                            x1="SEM VI",
+                            x1=5.5,
                             y1=1,
                             fillcolor="LIGHTSALMON",
                             opacity=0.7,
@@ -393,7 +393,7 @@ def analysis():
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM VI",
+                            x0=5.5,
                             y0=0,
                             x1="SEM VIII",
                             y1=1,
@@ -414,7 +414,7 @@ def analysis():
                             yref="paper",
                             x0="SEM III",
                             y0=0,
-                            x1="SEM VI",
+                            x1=3.5,
                             y1=1,
                             fillcolor="LIGHTSALMON",
                             opacity=0.7,
@@ -426,7 +426,7 @@ def analysis():
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM VI",
+                            x0=3.5,
                             y0=0,
                             x1="SEM VIII",
                             y1=1,
@@ -440,6 +440,8 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
+        st.write('look for the orange part in graph if its dipping compared to green part then selected college is suppressing your grades,if inverse is obsevered then college is overvaule the grades , in this case its good for students but should not get carried with that . if grades are consisting throughout (without any sudden dips of hikes) the graph then its good signs of college ')
+
     
     if anl_sel == 'Regular Vs Diploma Students' :   
         mean_df_d = pd.read_csv('./csv_db/mean_df_dip.csv')
@@ -505,44 +507,58 @@ def analysis():
                                 line=dict( width=4)))
             fig.add_trace(go.Scatter(x=sem, y=min_college_d, name =  'Diploma Min',
                                 line=dict( width=4)))
-
-
         fig.update_layout(
-                shapes=[
-                    # 2nd highlight
-                    dict(
-                        type="rect",
-                        xref="x",
-                        yref="paper",
-                        x0="SEM III",
-                        y0=0,
-                        x1="SEM VI",
-                        y1=1,
-                        fillcolor="LIGHTSALMON",
-                        opacity=0.7,
-                        layer="below",
-                        line_width=0,
-                    ),
-                    # 3rd highlight 
-                    dict(
-                        type="rect",
-                        xref="x",
-                        yref="paper",
-                        x0="SEM VI",
-                        y0=0,
-                        x1="SEM VIII",
-                        y1=1,
-                        fillcolor="mediumspringgreen",
-                        opacity=0.6,
-                        layer="below",
-                        line_width=0,
-                    )
-                ]
-            )
+                    shapes=[
+                        # 1st highlight
+                        dict(
+                            type="rect",
+                            # x-reference is assigned to the x-values
+                            xref="x",
+                            # y-reference is assigned to the plot paper [0,1]
+                            yref="paper",
+                            x0=0,
+                            y0=0,
+                            x1=1.5,
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 2nd highlight
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0=1.5,
+                            y0=0,
+                            x1=5.5,
+                            y1=1,
+                            fillcolor="LIGHTSALMON",
+                            opacity=0.7,
+                            layer="below",
+                            line_width=0,
+                        ),
+                        # 3rd highlight 
+                        dict(
+                            type="rect",
+                            xref="x",
+                            yref="paper",
+                            x0=5.5,
+                            y0=0,
+                            x1="SEM VIII",
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        )
+                    ]
+                )
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
-    
+        st.write('look for difference diploma student made in competition to regular student if its diploma students on top then its good choice for diploma students .')
     if anl_sel == 'Oral/Viva Vs Theory Exam':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
             
@@ -621,121 +637,38 @@ def analysis():
             
             # Add scatter trace for line
             fig.add_trace(go.Scatter(x=x_label, y=th_max, name= 'TH'+sub_college [:3] +' Max',
-                                    line=dict( width=4)))
+                                    mode='markers'))
             fig.add_trace(go.Scatter(x=x_label, y=tw_max, name= 'TW'+sub_college [:3] +' Max',
-                                    line=dict( width=4)))
+                                    mode='markers'))
             fig.add_trace(go.Scatter(x=x_label, y=or_max, name= 'OR'+sub_college [:3] +' Max',
-                                    line=dict( width=4)))
+                                    mode='markers'))
             fig.add_trace(go.Scatter(x=x_label, y=in_max, name= 'IN'+sub_college [:3] +' Max',
-                                    line=dict( width=4)))  
+                                    mode='markers'))  
             
                                     
             fig.add_trace(go.Scatter(x=x_label, y=th_mean, name= 'TH '+sub_college [:3] +' Average',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
             fig.add_trace(go.Scatter(x=x_label, y=tw_mean, name= 'TW '+sub_college [:3] +' Average',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
             fig.add_trace(go.Scatter(x=x_label, y=or_mean, name= 'OR '+sub_college [:3] +' Average',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
             fig.add_trace(go.Scatter(x=x_label, y=in_mean, name= 'IN '+sub_college [:3] +' Average',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
                                     
             fig.add_trace(go.Scatter(x=x_label, y=th_min, name= 'TH '+sub_college [:3] +' Min',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
             fig.add_trace(go.Scatter(x=x_label, y=tw_min, name= 'TW '+sub_college [:3] +' Min',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
             fig.add_trace(go.Scatter(x=x_label, y=or_min, name= 'OR '+sub_college [:3] +' Min',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
             fig.add_trace(go.Scatter(x=x_label, y=in_min, name= 'IN'+sub_college [:3] +' Min',
-                                    line=dict( width=4)))
+                                    mode='markers')) 
             
-            if dip_sel == False:
-                                
-                fig.update_layout(
-                    shapes=[
-                        # 1st highlight
-                        dict(
-                            type="rect",
-                            # x-reference is assigned to the x-values
-                            xref="x",
-                            # y-reference is assigned to the plot paper [0,1]
-                            yref="paper",
-                            x0="SEM I",
-                            y0=0,
-                            x1="SEM III",
-                            y1=1,
-                            fillcolor="mediumspringgreen",
-                            opacity=0.6,
-                            layer="below",
-                            line_width=0,
-                        ),
-                        # 2nd highlight
-                        dict(
-                            type="rect",
-                            xref="x",
-                            yref="paper",
-                            x0="SEM III",
-                            y0=0,
-                            x1="SEM VI",
-                            y1=1,
-                            fillcolor="LIGHTSALMON",
-                            opacity=0.7,
-                            layer="below",
-                            line_width=0,
-                        ),
-                        # 3rd highlight 
-                        dict(
-                            type="rect",
-                            xref="x",
-                            yref="paper",
-                            x0="SEM VI",
-                            y0=0,
-                            x1="SEM VIII",
-                            y1=1,
-                            fillcolor="mediumspringgreen",
-                            opacity=0.6,
-                            layer="below",
-                            line_width=0,
-                        )
-                    ]
-                )
-            else : 
-                 fig.update_layout(
-                    shapes=[
-                        # 2nd highlight
-                        dict(
-                            type="rect",
-                            xref="x",
-                            yref="paper",
-                            x0="SEM III",
-                            y0=0,
-                            x1="SEM VI",
-                            y1=1,
-                            fillcolor="LIGHTSALMON",
-                            opacity=0.7,
-                            layer="below",
-                            line_width=0,
-                        ),
-                        # 3rd highlight 
-                        dict(
-                            type="rect",
-                            xref="x",
-                            yref="paper",
-                            x0="SEM VI",
-                            y0=0,
-                            x1="SEM VIII",
-                            y1=1,
-                            fillcolor="mediumspringgreen",
-                            opacity=0.6,
-                            layer="below",
-                            line_width=0,
-                        )
-                    ]
-                )
-        st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
-        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+
         st.plotly_chart(fig)
+        st.write('Look for college with students with low internal grades and high theory grades .Such colleges are gems and should be recommended for new addmission .If exact opposite is obsevered then colleges is suppressing your ability to score.Such colleges should not be recommended for addmission.')
     
-    if anl_sel == 'Best & Worst college Rankings':
+    if anl_sel == 'Best college Rankings':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
         mean_df = pd.read_csv('./csv_db/mean_df.csv')   
         if dip_sel:
@@ -759,6 +692,7 @@ def analysis():
         ])
 
         st.plotly_chart(fig)
+        st.write('ranking are based on mean grades of students scored.this ranking should not misslead you with facility , teaching , campus ,staff behaviour, placements , etc of any particular college based on rankings.')
 
 
         dep_pre = mean_df.groupby(['college_code','department']).mean().round(2)
@@ -796,7 +730,7 @@ def analysis():
         ])
 
         st.plotly_chart(fig)
-    
+        st.write('segregated department wise rakings follows same caveats')
     if anl_sel == 'Consistent college Ranking':
         import statistics
         import plotly.graph_objects as go
@@ -849,15 +783,32 @@ def analysis():
                                     line=dict( width=4)))
             
             fig.update_layout(
+                    legend=dict(orientation="h"),
                     shapes=[
+                        # 1st highlight
+                        dict(
+                            type="rect",
+                            # x-reference is assigned to the x-values
+                            xref="x",
+                            # y-reference is assigned to the plot paper [0,1]
+                            yref="paper",
+                            x0=0,
+                            y0=0,
+                            x1=1.5,
+                            y1=1,
+                            fillcolor="mediumspringgreen",
+                            opacity=0.6,
+                            layer="below",
+                            line_width=0,
+                        ),
                         # 2nd highlight
                         dict(
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM III",
+                            x0=1.5,
                             y0=0,
-                            x1="SEM VI",
+                            x1=5.5,
                             y1=1,
                             fillcolor="LIGHTSALMON",
                             opacity=0.7,
@@ -869,7 +820,7 @@ def analysis():
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM VI",
+                            x0=5.5,
                             y0=0,
                             x1="SEM VIII",
                             y1=1,
@@ -883,6 +834,7 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
+        st.write('Look for the consistentcy between green and orange part as thats most prone to inconsistency of colleges.Observe the soomthness of line -more smooth means more consistent w.r.t semistersless deviation means more consistent w.r.t departments')
     
     if anl_sel == 'Top elective Subjects':
         import statistics
@@ -935,8 +887,9 @@ def analysis():
         ])
 
         st.plotly_chart(fig)
+        st.write('above ranking is count of elective subject choosen within different colleges.only tip-choose elective subject which has good resources available to study ,mostly that subject it one of top elected subjectdo thorough research before electing subject as good resources yeilds good grades ')
 
-    if anl_sel == 'Ellected Subject & performance':
+    if anl_sel == 'Elected Subject & performance':
         import plotly.express as px
 
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
@@ -961,6 +914,7 @@ def analysis():
 
         fig = px.bar(new_df, x='elective', y='c3_th',color='c3_th',color_continuous_scale='rdylbu')
         st.plotly_chart(fig)
+        st.write('Here look for subjects that have high grades and your interest in it .')
     
 
     if anl_sel == 'Department Wise performance':
@@ -1021,9 +975,9 @@ def analysis():
                             xref="x",
                             # y-reference is assigned to the plot paper [0,1]
                             yref="paper",
-                            x0="SEM I",
+                            x0=0,
                             y0=0,
-                            x1="SEM III",
+                            x1=1.5,
                             y1=1,
                             fillcolor="mediumspringgreen",
                             opacity=0.6,
@@ -1035,9 +989,9 @@ def analysis():
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM III",
+                            x0=1.5,
                             y0=0,
-                            x1="SEM VI",
+                            x1=5.5,
                             y1=1,
                             fillcolor="LIGHTSALMON",
                             opacity=0.7,
@@ -1049,7 +1003,7 @@ def analysis():
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM VI",
+                            x0=5.5,
                             y0=0,
                             x1="SEM VIII",
                             y1=1,
@@ -1072,7 +1026,7 @@ def analysis():
                             yref="paper",
                             x0="SEM III",
                             y0=0,
-                            x1="SEM VI",
+                            x1=3.5,
                             y1=1,
                             fillcolor="LIGHTSALMON",
                             opacity=0.7,
@@ -1084,7 +1038,7 @@ def analysis():
                             type="rect",
                             xref="x",
                             yref="paper",
-                            x0="SEM VI",
+                            x0=3.5,
                             y0=0,
                             x1="SEM VIII",
                             y1=1,
@@ -1159,6 +1113,6 @@ def working():
     import streamlit as st
     st.markdown(
         """
-Wait for this feature        """
+Wait for this information         """
     )
-    st.write('done')
+   
