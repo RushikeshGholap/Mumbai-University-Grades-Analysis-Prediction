@@ -438,7 +438,7 @@ def analysis():
                     ]
                 )
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
-        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> and <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
         st.write('look for the orange part in graph if its dipping compared to green part then selected college is suppressing your grades,if inverse is obsevered then college is overvaule the grades , in this case its good for students but should not get carried with that . if grades are consisting throughout (without any sudden dips of hikes) the graph then its good signs of college ')
 
@@ -556,7 +556,7 @@ def analysis():
                     ]
                 )
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
-        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> and <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
         st.write('look for difference diploma student made in competition to regular student if its diploma students on top then its good choice for diploma students .')
     if anl_sel == 'Oral/Viva Vs Theory Exam':
@@ -832,7 +832,7 @@ def analysis():
                     ]
                 )
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
-        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> and <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
         st.write('Look for the consistentcy between green and orange part as thats most prone to inconsistency of colleges.Observe the soomthness of line -more smooth means more consistent w.r.t semistersless deviation means more consistent w.r.t departments')
     
@@ -1050,7 +1050,7 @@ def analysis():
                     ]
                 )
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
-        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> or <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
+        st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> and <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
 
 def contribute():
