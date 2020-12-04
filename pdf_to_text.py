@@ -69,9 +69,9 @@ import os
 for file in os.listdir("./pdf/"):
     if file.endswith(".pdf"):
         files = []
-        outfile = file + '.txt'
+        outfile =  './processed_txt/'+ file + '.txt'
         print(outfile)
         files.append(os.path.join("./pdf/", file))
         
         print(files)
-        extract_text(files=files,outfile=outfile,output_dir='./txt/')
+        extract_text(files=files,outfile=outfile)

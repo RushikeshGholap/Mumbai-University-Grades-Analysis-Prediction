@@ -32,11 +32,10 @@ def about():
     
     st.markdown(
         """ <p ><b><h3> Why this Mumbai University Engineering Project ?</h3></b>
-         <b> Mumbai University </b> is one of the well known and has the most number of students graduating per year not only in Maharashtra but all over India.
-         Though there is not a well-recognized platform/website that helps students to compare colleges on basis of grades. And this is a major pit-fall for students.
-         They don't know what will be their grades and are they good enough, compared to other colleges when he/she gets graduated and competing with all others for the job. 
-         There is no guarantee that a good grade will land you a job, but is definitely a gateway for an interview.
-         Whereas if you pass out from low grading college, getting into the interview itself is a struggle as you would be well under the cutoff mentioned.
+         <b> Mumbai University </b> is one of the well known university .It has the most number of students graduating per year, not only in Maharashtra but all over India.
+         Still there is no well-recognized platform/website that helps students to compare colleges on basis of grades. And this creates a major pit-fall for students.
+         They don't know what will be their grades and are they good enough to compete with others while job search.
+         There is no guarantee that a good grade will land you a job, but it's definitely a ticket to an interview.
         </p>
 
 
@@ -278,7 +277,7 @@ def prediction():
                     yaxis_title='Pointers',height=550)
     fig.update_yaxes(tickvals=[0,1,2,3,4,5,6,7,8,9,10])
     st.plotly_chart(fig)
-    st.write("The prediction above can be within range of ±0.5 given the conditions are ideal as before.consider this predictions as current rate of scoring and adjust your performance according to desire cgpi.")
+    st.write("The prediction above can be within range of ±0.5 given the conditions are ideal as before. Consider this predictions as current rate of scoring and adjust your performance according to score desire cgpi.")
    
     st.write(" <b >Predictions performed Counter: <i style ='color:red'>%.0f</i> </b>"%counter.shape[0], unsafe_allow_html=True)
     df = counter['type'].value_counts().rename_axis('Type').reset_index(name='Counts')
@@ -440,7 +439,7 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> and <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
-        st.write('look for the orange part in graph if its dipping compared to green part then selected college is suppressing your grades,if inverse is obsevered then college is overvaule the grades , in this case its good for students but should not get carried with that . if grades are consisting throughout (without any sudden dips of hikes) the graph then its good signs of college ')
+        st.write('Look in the orange part, if grades dipping compared to in green part then select college is suppressing your grades, if inverse is obsevered then college is overvaluing the grades .If grades are consistent throughout (without any sudden dips of hikes) graph then its good signs of select college.')
 
     
     if anl_sel == 'Regular Vs Diploma Students' :   
@@ -558,7 +557,7 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> and <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
-        st.write('look for difference diploma student made in competition to regular student if its diploma students on top then its good choice for diploma students .')
+        st.write('Watchout for diploma vs regular students ,if diploma students have upper hand then select college is better choice for new admission diploma students.')
     if anl_sel == 'Oral/Viva Vs Theory Exam':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
             
@@ -666,7 +665,7 @@ def analysis():
             
 
         st.plotly_chart(fig)
-        st.write('Look for college with students with low internal grades and high theory grades .Such colleges are gems and should be recommended for new addmission .If exact opposite is obsevered then colleges is suppressing your ability to score.Such colleges should not be recommended for addmission.')
+        st.write('Look for students of college with High internal grades and Low theory grades .Such colleges are gems and should be recommended for new admission .If exact opposite is obsevered then colleges is suppressing your ability to score.Such colleges should avoided.')
     
     if anl_sel == 'Best college Rankings':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
@@ -692,7 +691,7 @@ def analysis():
         ])
 
         st.plotly_chart(fig)
-        st.write('ranking are based on mean grades of students scored.this ranking should not misslead you with facility , teaching , campus ,staff behaviour, placements , etc of any particular college based on rankings.')
+        st.write('Ranking are based on mean grades of students scored. This ranking should not misslead you with facility , teaching , campus ,staff behaviour, placements , etc of any particular college based on rankings.')
 
 
         dep_pre = mean_df.groupby(['college_code','department']).mean().round(2)
@@ -730,7 +729,7 @@ def analysis():
         ])
 
         st.plotly_chart(fig)
-        st.write('segregated department wise rakings follows same caveats')
+        st.write('Segregated department wise rakings follows same caveats')
     if anl_sel == 'Consistent college Ranking':
         import statistics
         import plotly.graph_objects as go
@@ -834,7 +833,7 @@ def analysis():
         st.write('<b>The background color determines who is incharge of your results</b>',unsafe_allow_html=True)
         st.write('<b><i style="color:mediumspringgreen"> External Checking</i></b> and <b><i style = "color:LIGHTSALMON"> Internal Checking </i></b>',unsafe_allow_html=True)
         st.plotly_chart(fig)
-        st.write('Look for the consistentcy between green and orange part as thats most prone to inconsistency of colleges.Observe the soomthness of line -more smooth means more consistent w.r.t semistersless deviation means more consistent w.r.t departments')
+        st.write('Look for the consistentcy between green and orange part as thats most prone to inconsistency of colleges. Observe the smoothness of line -more smooth means more consistent w.r.t semisters .less deviation means more consistent w.r.t departments')
     
     if anl_sel == 'Top elective Subjects':
         import statistics
@@ -887,7 +886,7 @@ def analysis():
         ])
 
         st.plotly_chart(fig)
-        st.write('above ranking is count of elective subject choosen within different colleges.only tip-choose elective subject which has good resources available to study ,mostly that subject it one of top elected subjectdo thorough research before electing subject as good resources yeilds good grades ')
+        st.write('Above ranking is count of elective subject choosen within different colleges. Only tip- choose elective subject which has good resources available to study, mostly that subject is one of top elected subject. Do thorough research before electing subject as good resources aids in good grades ')
 
     if anl_sel == 'Elected Subject & performance':
         import plotly.express as px
@@ -1056,7 +1055,7 @@ def analysis():
 def contribute():
     import streamlit as st
     from PIL import Image
-    st.write('You can contribute in many ways not only to me but your friends.Those who need to choose college, one who are in college. So that they can normalize their expectations .See the pitfalls, dips in grades of college, and perform accordingly')
+    st.write('You can contribute in many ways not only to me but your friends. Those who need to choose college, one who are in college. So that they can normalize their expectations .See the pitfalls, dips in grades of college, and perform accordingly')
     st.write('You can share my profile and help me land a Job',unsafe_allow_html=True)
     #<a href="https://www.linkedin.com/in/rushikeshgholap/"> Rushikesh Gholap</a> 
     st.write('<a href="https://www.linkedin.com/in/rushikeshgholap/"> LinkedIn    </a> <br> <a href="https://github.com/RushikeshGholap"> Github </a> <br> <a href="mailto:rushikeshbgholap?Subject=Job" target="_top">Email</a>',unsafe_allow_html=True)
