@@ -57,12 +57,12 @@ This demo shows how to use `st.write` to visualize Pandas DataFrames.
                 ft.suggestion,
             )
         ),
-        (
-            "How it works ?",
-            (
-                ft.working,
-            )
-        )
+        # (
+        #     "How it works ?",
+        #     (
+        #         ft.working,
+        #     )
+        # )
     ]
 )
 
@@ -71,7 +71,7 @@ def run():
       
     st.markdown(
         """ <p style="color:red">
-         <b>Note</b>- Site is under progress some glitches and minor changes needs to be fixed , ignore them for now .
+         <b>Note</b>- The site is in progress. Some glitches and minor changes need to be fixed. Ignore them for now.
         </p>
 
 
@@ -84,7 +84,7 @@ def run():
     demo()
 
     
-    st.write("##### -Rushikesh Gholap")
+    st.write('##### -<a href="https://www.linkedin.com/in/rushikeshgholap/"> Rushikesh Gholap </a>',unsafe_allow_html=True)
     
 
 if __name__ == "__main__":
