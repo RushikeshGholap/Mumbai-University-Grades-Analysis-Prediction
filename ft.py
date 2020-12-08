@@ -158,9 +158,10 @@ def prediction():
             st.write("<b> <i style ='color:#3366ff'>Diploma Selected</i> </b>", unsafe_allow_html=True)
         st.write("<b><i>Entered Pointers 👇</i></b>",unsafe_allow_html = True)
         st.write("<b>SEM III : <i style='color:#3366ff'>%4.2f</i> | SEM IV : <i style='color:#3366ff'>%4.2f</i> | SEM V : <i style='color:#3366ff'>%4.2f</i> | SEM VI : <i style='color:#3366ff'>%4.2f</i> | SEM VII : <i style='color:#3366ff'>%4.2f</i> </b>"%(sem_3,sem_4,sem_5,sem_6,sem_7),unsafe_allow_html=True)
-        
+        counts = ''
         if st.button('Predict'):
             sem_8 = float(regression_model_diploma.predict(pred[-1:]))
+            counts = 'of ID : '+str(counter.shape[0]+1)
             cgpi = statistics.mean([sem_8,sem_3,sem_4,sem_5,sem_6,sem_7])
             st.write(" <b > The predicted pointers for SEM VIII : <i style ='color:#0047b3' >%4.2f</i></b> "%sem_8, unsafe_allow_html=True)
             st.write(" <b >The predicted CGPI : <i style ='color:#0047b3'>%4.2f</i> </b>"%cgpi, unsafe_allow_html=True)
