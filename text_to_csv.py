@@ -313,7 +313,7 @@ for file in os.listdir("./processed_txt/"):
         #tex_df('./txt/'+file,df)
         df1 = pd.read_csv('./csv_db/final.csv',sep=',', error_bad_lines=False, index_col=False, dtype='unicode')
         df = tex_df('./processed_txt/'+file,df1)
-        df.to_csv('final.csv',mode='w',columns=['university','page_no','department','exam_held_on',
+        df.to_csv('./csv_db/final.csv',mode='w',columns=['university','page_no','department','exam_held_on',
                                                 'college_code','result_date','seat_no','elective',
                                                 'result','c1','c2','c3','c4','c5','c6','c1_th','c1_tw',
                                                     'c1_or','c1_in','c2_th','c2_tw','c2_or','c2_in','c3_th',

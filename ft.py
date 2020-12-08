@@ -97,10 +97,10 @@ def prediction():
     st.sidebar.success("Enter the semwise Pointers  👇 ")
     
     if diploma:
-        counter = pd.read_csv("./csv_db/counter.csv")
-        mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
-        max_df = pd.read_csv('./csv_db/max_df_dip.csv')
-        min_df = pd.read_csv('./csv_db/min_df_dip.csv')
+        counter = pd.read_csv("./csv_db/counter.csv")#file that keeps count of prediction data
+        mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')#file consist mean of diploma data
+        max_df = pd.read_csv('./csv_db/max_df_dip.csv')#file consist max of diploma data
+        min_df = pd.read_csv('./csv_db/min_df_dip.csv')#file consist min of diploma data
 
         dip_template = pd.read_csv('./csv_db/Diploma_template.csv')
         
@@ -961,19 +961,23 @@ def analysis():
         sub_dep = st.selectbox("Choose department/stream to see ranking ", list(department_list))
         cal_sub = st.radio("Select a metric to compute",
                             ('Average',  'Max','Min'))
-        
+        if sub_dep in ['COMPUTER ENGINEERING']:
+            elec_c = 'c3_th'
+        else:
+            elec_c = 'c2_th'
         if cal_sub == 'Average':
-            new = data.groupby(['department','elective'],as_index=False)['c3_th'].mean()
+            new = data.groupby(['department','elective'],as_index=False)[elec_c].mean()
         if cal_sub == 'Max':
-            new = data.groupby(['department','elective'],as_index=False)['c3_th'].max()
+            new = data.groupby(['department','elective'],as_index=False)[elec_c].max()
         if cal_sub == 'Min':
-            new = data.groupby(['department','elective'],as_index=False)['c3_th'].min()
-        new_df = new[(new['department']==sub_dep)][['elective','c3_th']]
+            new = data.groupby(['department','elective'],as_index=False)[elec_c].min()
+       
+        new_df = new[(new['department']==sub_dep)][['elective',elec_c]]
 
         if dip_sel:
             sub_dep = 'Dip. ' + sub_dep
 
-        fig = px.bar(new_df, x='elective', y='c3_th',color='c3_th',color_continuous_scale='rdylbu')
+        fig = px.bar(new_df, x='elective', y=elec_c,color=elec_c,color_continuous_scale='rdylbu')
         fig.update_layout(title=sub_dep +" Elected subject's " + cal_sub + " Performance",title_x=0.5,
                         xaxis_title='Courses',
                     yaxis_title='Marks Obtained',height=550)
