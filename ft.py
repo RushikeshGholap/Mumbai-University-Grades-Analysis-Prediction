@@ -1,4 +1,3 @@
-
 def about():
     import streamlit as st
     
@@ -17,9 +16,9 @@ def about():
     )
     st.markdown(
         """ <p ><b><h3>About me ?</h3></b>
-       I am an enthusiastic Data Scientist who is always looking for a solution that makes a difference. 
+       I am an aspiring Data Scientist who is always looking for a solution that makes a difference. 
        I am working on independent projects that help society. 
-       While doing so, I am exploring and learning the required skills and knowledge. 
+       While doing so, I am also exploring and learning the required skills and knowledge. 
        I have Graduated from Mumbai University.
         </p>
 
@@ -30,10 +29,10 @@ def about():
     
     st.markdown(
         """ <p ><b><h3> Why this Mumbai University Engineering Project ?</h3></b>
-         <b> Mumbai University </b> is one of the well-known universities in India and has the most graduating students per year.
+         <b> Mumbai University </b> is one of the well-known universities in India and has the most number of students graduating per year.
          Still, there is no well-recognized platform/website that helps students compare colleges based on grades. And this creates a major pit-fall for students.
          They won't know what their grades would be and are they good enough to compete with others during the job search.
-         Good grades do not guarantee a job, but it'll certainly a ticket to an interview.
+         Good grades do not guarantee a job, but they certainly a ticket to an interview.
         </p>
 
 
@@ -1142,7 +1141,7 @@ def contribute():
 
     )
     st.write('You can contribute in many ways not only to me but your friends. Those who need to choose a college, one who is in college. So that they can normalize their expectations, see the pitfalls, dips in grades of college, and perform accordingly.')
-    st.write('You can share my profile and help me land a Job',unsafe_allow_html=True)
+    st.write('You can connect/contact with me here:',unsafe_allow_html=True)
     #<a href="https://www.linkedin.com/in/rushikeshgholap/"> Rushikesh Gholap</a> 
     st.write('<a href="https://www.linkedin.com/in/rushikeshgholap/"> LinkedIn    </a> <br> <a href="https://github.com/RushikeshGholap"> Github </a> <br> <a href="mailto:rushikeshbgholap?Subject=Job" target="_top">Email</a>',unsafe_allow_html=True)
     #st.write('You can share my profile and help me land a Job',unsafe_allow_html=True)
