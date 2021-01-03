@@ -21,22 +21,14 @@ ft = OrderedDict(
             "Prediction",
             (
                 ft.prediction,
-                """
-This app shows how you can use Streamlit to build cool animations.
-It displays an animated fractal based on the the Julia Set. Use the slider
-to tune different parameters.
-""",
+               
             ),
         ),
         (
             "Analyse/Compare/Insights",
             (
                 ft.analysis,
-                """
-This demo illustrates a combination of plotting and animation with
-Streamlit. We're generating a bunch of random numbers in a loop for around
-5 seconds. Enjoy!
-""",
+                
             ),
         ),
        
@@ -44,11 +36,7 @@ Streamlit. We're generating a bunch of random numbers in a loop for around
             "Contribute",
             (
                 ft.contribute,
-                """
-This demo shows how to use `st.write` to visualize Pandas DataFrames.
-
-(Data courtesy of the [UN Data Explorer](http://data.un.org/Explorer.aspx).)
-""",
+               
             ),
         ),
         (
@@ -84,7 +72,7 @@ def run():
     demo()
 
     
-    st.write('##### -<a href="https://www.linkedin.com/in/rushikeshgholap/"> Rushikesh Gholap </a>',unsafe_allow_html=True)
+    st.write('##### -<a href="https://www.linkedin.com/in/rushikeshgholap/" target="_blank"> Rushikesh Gholap </a>',unsafe_allow_html=True)
     
 
 if __name__ == "__main__":

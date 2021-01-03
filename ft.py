@@ -96,14 +96,14 @@ def prediction():
     st.sidebar.success("Enter the semwise Pointers  👇 ")
     
     if diploma:
-        counter = pd.read_csv("./csv_db/counter.csv")#file that keeps count of prediction data
-        mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')#file consist mean of diploma data
-        max_df = pd.read_csv('./csv_db/max_df_dip.csv')#file consist max of diploma data
-        min_df = pd.read_csv('./csv_db/min_df_dip.csv')#file consist min of diploma data
+        counter = pd.read_csv("./data/csv_db/counter.csv")#file that keeps count of prediction data
+        mean_df = pd.read_csv('./data/csv_db/mean_df_dip.csv')#file consist mean of diploma data
+        max_df = pd.read_csv('./data/csv_db/max_df_dip.csv')#file consist max of diploma data
+        min_df = pd.read_csv('./data/csv_db/min_df_dip.csv')#file consist min of diploma data
 
-        dip_template = pd.read_csv('./csv_db/Diploma_template.csv')
+        dip_template = pd.read_csv('./data/csv_db/Diploma_template.csv')
         
-        infile = open('regression_model_diploma','rb')
+        infile = open('data/regression_model_diploma','rb')
         regression_model_diploma = pickle.load(infile)
         infile.close()
 
@@ -169,14 +169,14 @@ def prediction():
                                 'sem_3': sem_3,            'sem_4': sem_4,        'sem_5':sem_5 ,
                                 'sem_6': sem_6,            'sem_7': sem_7 , 'sem_8':sem_8, 'cgpi':cgpi , 'type':'Diploma'}
             counter = counter.append(row,ignore_index =True)
-            counter.to_csv('./csv_db/counter.csv',index=False)
+            counter.to_csv('./data/csv_db/counter.csv',index=False)
         
     else:
-        counter = pd.read_csv("./csv_db/counter.csv")
-        mean_df = pd.read_csv('./csv_db/mean_df.csv')
-        max_df = pd.read_csv('./csv_db/max_df.csv')
-        min_df = pd.read_csv('./csv_db/min_df.csv')
-        template = pd.read_csv('./csv_db/template.csv')
+        counter = pd.read_csv("./data/csv_db/counter.csv")
+        mean_df = pd.read_csv('./data/csv_db/mean_df.csv')
+        max_df = pd.read_csv('./data/csv_db/max_df.csv')
+        min_df = pd.read_csv('./data/csv_db/min_df.csv')
+        template = pd.read_csv('./data/csv_db/template.csv')
 
 
         college_code_list = mean_df['college_code'].unique()
@@ -187,7 +187,7 @@ def prediction():
             "Choose Department", list(dep_list))
 
 
-        infile = open('regression_model_regular','rb')
+        infile = open('data/regression_model_regular','rb')
         regression_model_regular = pickle.load(infile)
         infile.close()
               
@@ -246,7 +246,7 @@ def prediction():
                                 'sem_3': sem_3,            'sem_4': sem_4,        'sem_5':sem_5 ,
                                 'sem_6': sem_6,            'sem_7': sem_7 , 'sem_8':sem_8, 'cgpi':cgpi , 'type':'Regular'}
             counter = counter.append(row,ignore_index =True)
-            counter.to_csv('./csv_db/counter.csv',index=False)
+            counter.to_csv('./data/csv_db/counter.csv',index=False)
             
     
             
@@ -304,9 +304,9 @@ def analysis():
 
     )
 
-    mean_df = pd.read_csv('./csv_db/mean_df.csv')
-    max_df = pd.read_csv('./csv_db/max_df.csv')
-    min_df = pd.read_csv('./csv_db/min_df.csv')
+    mean_df = pd.read_csv('./data/csv_db/mean_df.csv')
+    max_df = pd.read_csv('./data/csv_db/max_df.csv')
+    min_df = pd.read_csv('./data/csv_db/min_df.csv')
     
     anl_sel = st.sidebar.radio("Select what insights you want to see and compare",('Internal Vs External Gradings','Regular Vs Diploma Students',
                                 'Oral/Viva Vs Theory Exam','Best college Rankings','Consistent college Ranking','Top Elective Subjects',
@@ -316,9 +316,9 @@ def analysis():
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
             
         if dip_sel:
-            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
-            max_df = pd.read_csv('./csv_db/max_df_dip.csv')
-            min_df = pd.read_csv('./csv_db/min_df_dip.csv')
+            mean_df = pd.read_csv('./data/csv_db/mean_df_dip.csv')
+            max_df = pd.read_csv('./data/csv_db/max_df_dip.csv')
+            min_df = pd.read_csv('./data/csv_db/min_df_dip.csv')
             sem_1,sem_2 = None,None
         college_code_list = mean_df['college_code'].unique()
         mul_coll = st.multiselect("Choose Multiple Colleges / CollegeCodes to compare", list(college_code_list),default=['124:MGMCET','126:SAKEC','174:RAIT','17:BVCE'])
@@ -456,12 +456,12 @@ def analysis():
         st.write("Look in the orange part. If grades are dipping compared to in the green part, then select college is suppressing your grades. If the inverse is observed, then college is overvaluing the grades. If grades are consistent throughout (without any sudden dips or hikes) graph, then it's a good college.")
            
     if anl_sel == 'Regular Vs Diploma Students' :   
-        mean_df_d = pd.read_csv('./csv_db/mean_df_dip.csv')
-        max_df_d = pd.read_csv('./csv_db/max_df_dip.csv')
-        min_df_d = pd.read_csv('./csv_db/min_df_dip.csv')
-        mean_df_r = pd.read_csv('./csv_db/mean_df.csv')
-        max_df_r = pd.read_csv('./csv_db/max_df.csv')
-        min_df_r = pd.read_csv('./csv_db/min_df.csv')
+        mean_df_d = pd.read_csv('./data/csv_db/mean_df_dip.csv')
+        max_df_d = pd.read_csv('./data/csv_db/max_df_dip.csv')
+        min_df_d = pd.read_csv('./data/csv_db/min_df_dip.csv')
+        mean_df_r = pd.read_csv('./data/csv_db/mean_df.csv')
+        max_df_r = pd.read_csv('./data/csv_db/max_df.csv')
+        min_df_r = pd.read_csv('./data/csv_db/min_df.csv')
         
         
         college_code_list = mean_df_d['college_code'].unique()
@@ -579,9 +579,9 @@ def analysis():
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
             
         if dip_sel:
-            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
-            max_df = pd.read_csv('./csv_db/max_df_dip.csv')
-            min_df = pd.read_csv('./csv_db/min_df_dip.csv')
+            mean_df = pd.read_csv('./data/csv_db/mean_df_dip.csv')
+            max_df = pd.read_csv('./data/csv_db/max_df_dip.csv')
+            min_df = pd.read_csv('./data/csv_db/min_df_dip.csv')
             sem_1,sem_2 = None,None
         college_code_list = mean_df['college_code'].unique()
         mul_coll = st.multiselect("Choose Multiple Colleges / CollegeCodes to compare", list(college_code_list),default=['124:MGMCET','126:SAKEC','174:RAIT','17:BVCE'])
@@ -689,9 +689,9 @@ def analysis():
     
     if anl_sel == 'Best college Rankings':
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
-        mean_df = pd.read_csv('./csv_db/mean_df.csv')   
+        mean_df = pd.read_csv('./data/csv_db/mean_df.csv')   
         if dip_sel:
-            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
+            mean_df = pd.read_csv('./data/csv_db/mean_df_dip.csv')
         import plotly.graph_objects as go
         import pandas as pd
 
@@ -774,7 +774,7 @@ def analysis():
         import plotly.graph_objects as go
         import pandas as pd
         
-        mean_df = pd.read_csv('./csv_db/mean_df.csv')
+        mean_df = pd.read_csv('./data/csv_db/mean_df.csv')
         
         mean_df['stddev']=1
         for index,x in mean_df.iterrows():
@@ -882,9 +882,9 @@ def analysis():
         import plotly.graph_objects as go
         import pandas as pd
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
-        data = pd.read_csv('./csv_db/regular.csv')
+        data = pd.read_csv('./data/csv_db/regular.csv')
         if dip_sel:
-            data = pd.read_csv('./csv_db/diploma.csv')
+            data = pd.read_csv('./data/csv_db/diploma.csv')
             sem_1,sem_2 = None,None
         new = data.groupby(['college_code','elective','department']).max()
         new.reset_index(inplace=True)
@@ -952,9 +952,9 @@ def analysis():
         import plotly.express as px
 
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
-        data = pd.read_csv('./csv_db/regular.csv')
+        data = pd.read_csv('./data/csv_db/regular.csv')
         if dip_sel:
-            data = pd.read_csv('./csv_db/diploma.csv')
+            data = pd.read_csv('./data/csv_db/diploma.csv')
             sem_1,sem_2 = None,None
         department_list = mean_df['department'].unique()
        
@@ -989,9 +989,9 @@ def analysis():
         dip_sel = st.checkbox('Diploma Student/Direct 2nd year',False)
             
         if dip_sel:
-            mean_df = pd.read_csv('./csv_db/mean_df_dip.csv')
-            max_df = pd.read_csv('./csv_db/max_df_dip.csv')
-            min_df = pd.read_csv('./csv_db/min_df_dip.csv')
+            mean_df = pd.read_csv('./data/csv_db/mean_df_dip.csv')
+            max_df = pd.read_csv('./data/csv_db/max_df_dip.csv')
+            min_df = pd.read_csv('./data/csv_db/min_df_dip.csv')
             sem_1,sem_2 = None,None
         college_code_list = mean_df['college_code'].unique()
         sub_college = st.selectbox("Choose Multiple Colleges / CollegeCodes to compare", list(college_code_list))
@@ -1143,14 +1143,14 @@ def contribute():
     st.write('You can contribute in many ways not only to me but your friends. Those who need to choose a college, one who is in college. So that they can normalize their expectations, see the pitfalls, dips in grades of college, and perform accordingly.')
     st.write('You can connect/contact with me here:',unsafe_allow_html=True)
     #<a href="https://www.linkedin.com/in/rushikeshgholap/"> Rushikesh Gholap</a> 
-    st.write('<a href="https://www.linkedin.com/in/rushikeshgholap/"> LinkedIn    </a> <br> <a href="https://github.com/RushikeshGholap"> Github </a> <br> <a href="mailto:rushikeshbgholap?Subject=Job" target="_top">Email</a>',unsafe_allow_html=True)
+    st.write('<a href="https://www.linkedin.com/in/rushikeshgholap/" target="_blank"> LinkedIn    </a> <br> <a href="https://github.com/RushikeshGholap" target="_blank"> Github </a> <br> <a href="mailto:rushikeshbgholap?Subject=Job" target="_blank">Email</a>',unsafe_allow_html=True)
     #st.write('You can share my profile and help me land a Job',unsafe_allow_html=True)
-    st.write('You can donate me via UPI- rushikesh131998@oksbi')
-    st.write('Or can click here (Only works with UPI enabled device)<a href="upi://pay?pa=rushikesh131998@oksbi&pn=rushikesh gholap&aid=ugicagicansjmug"> Donate</a>',unsafe_allow_html=True)
+    st.write('You can donate me via UPI- rushikeshbgholap@okicici')
+    st.write('Or can click here (Only works with UPI enabled device)<a href="upi://pay?pa=rushikeshbgholap@okicici&pn=rushikesh gholap&aid=ugicagicansjmug" target="_blank"> Donate</a>',unsafe_allow_html=True)
     qr = st.button('Scan QR Code')
     
     if qr:
-        image = Image.open('upi.jpg')
+        image = Image.open('./data/upi.jpg')
         st.image(image, width=300)
 
 def suggestion():
@@ -1192,9 +1192,9 @@ def suggestion():
         success = st.button('Submit')
         sugges = {'name':user_name,'contact':user_contact,'suggestion':user_input}
         if success:
-            suggestion = pd.read_csv('./csv_db/suggestion.csv')
+            suggestion = pd.read_csv('./data/csv_db/suggestion.csv')
             suggestion =  suggestion.append(sugges,ignore_index =True)
-            suggestion.to_csv('./csv_db/suggestion.csv',index =False)
+            suggestion.to_csv('./data/csv_db/suggestion.csv',index =False)
             user_name,user_contact,user_input  = '','',''
             st.success('Thank you for suggestion/feedback.')
 

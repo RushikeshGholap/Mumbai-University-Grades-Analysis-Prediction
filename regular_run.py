@@ -15,7 +15,7 @@ import pickle
 
 #import data from csv
 
-results=pd.read_csv('./csv_db/final.csv',sep=',', error_bad_lines=False, index_col=False)
+results=pd.read_csv('./data/csv_db/final.csv',sep=',', error_bad_lines=False, index_col=False)
 #removing unique and unwanted columns for eda/ml purposes
 
 results.drop(['university', 'page_no',  'exam_held_on',
@@ -104,12 +104,12 @@ for x in ['sem_1','sem_2']:
     regular[x]=pd.to_numeric(regular[x])
      
 
-regular.to_csv("./csv_db/regular.csv")
-diploma.to_csv("./csv_db/diploma.csv")
+regular.to_csv("./data/csv_db/regular.csv")
+diploma.to_csv("./data/csv_db/diploma.csv")
 
 
 
-data= pd.read_csv('./csv_db/final.csv')
+data= pd.read_csv('./data/csv_db/final.csv')
 
 data =  regular.filter(['department', 'college_code',
                         'sem_1','sem_2', 'sem_3', 'sem_4', 'sem_5', 
@@ -136,7 +136,7 @@ print(df1.head(3))
 df1.plot(kind='bar',figsize=(10,8))
 #print(X_test.columns)
 
-X_test.to_csv('./csv_db/template.csv',index = False)
+X_test.to_csv('./data/csv_db/template.csv',index = False)
 outfile = open('regression_model_regular','wb')
 pickle.dump(regressor,outfile)
 outfile.close()
@@ -145,15 +145,15 @@ plt.show()
 
 mean_df = regular.groupby(['college_code','department']).mean()
 mean_df.reset_index(inplace=True)
-mean_df.to_csv('./csv_db/mean_df.csv',index =False)
+mean_df.to_csv('./data/csv_db/mean_df.csv',index =False)
 
 max_df = regular.groupby(['college_code','department']).max()
 max_df.reset_index(inplace=True)
-max_df.to_csv('./csv_db/max_df.csv',index =False)
+max_df.to_csv('./data/csv_db/max_df.csv',index =False)
 
 
 min_df = regular.groupby(['college_code','department']).min()
 min_df.reset_index(inplace=True)
-min_df.to_csv('./csv_db/min_df.csv',index =False)
+min_df.to_csv('./data/csv_db/min_df.csv',index =False)
 
 
