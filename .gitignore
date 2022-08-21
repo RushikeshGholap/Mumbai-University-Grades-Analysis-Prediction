@@ -2,3 +2,6 @@
 Images/Departmentwise/Departmentwise "822:PILLAIS".png
 *.png
 Images/Departmentwise/Departmentwise "822:PILLAIS".png
+
+env/**
+**/__pycache__/**
