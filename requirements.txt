@@ -6,5 +6,5 @@ seaborn
 streamlit  
 plotly
 statistics 
-xgboost
+xgboost=1.5
 
